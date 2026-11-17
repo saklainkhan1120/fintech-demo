@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Nuvanta Pay — Next-Gen Neobank & Mobile Money Flagship</title>
+<title>MyCash — Next-Gen Mobile Money App</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -281,9 +281,7 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* -------------------------------------------
-     SCREEN 1: SPLASH SCREEN (LUXURY FINTECH)
-  -------------------------------------------- */
+  /* SCREEN 1: SPLASH SCREEN */
   .screen-splash-container {
     flex: 1;
     display: flex;
@@ -374,9 +372,7 @@
     cursor: pointer;
   }
 
-  /* -------------------------------------------
-     SCREEN 2: REGISTER / ONBOARDING
-  -------------------------------------------- */
+  /* SCREEN 2: REGISTER */
   .onboarding-screen-box {
     display: flex;
     flex-direction: column;
@@ -452,9 +448,7 @@
   }
   .phone-number-field:focus { border-color: var(--primary-indigo); }
 
-  /* -------------------------------------------
-     SCREEN 3: OTP VERIFICATION
-  -------------------------------------------- */
+  /* SCREEN 3: OTP */
   .otp-digits-row {
     display: flex;
     justify-content: space-between;
@@ -481,9 +475,7 @@
     color: #A5B4FC;
   }
 
-  /* -------------------------------------------
-     SCREEN 4: PIN & BIOMETRIC SETUP
-  -------------------------------------------- */
+  /* SCREEN 4: PIN */
   .pin-dots-container {
     display: flex;
     justify-content: center;
@@ -531,9 +523,7 @@
     transform: scale(0.92);
   }
 
-  /* -------------------------------------------
-     SCREEN 5: HOME DASHBOARD (LUXURY FINTECH)
-  -------------------------------------------- */
+  /* SCREEN 5: HOME DASHBOARD */
   .home-dash-header {
     display: flex;
     justify-content: space-between;
@@ -567,7 +557,7 @@
     color: var(--text-slate);
   }
 
-  /* Liquid Balance Card */
+  /* Balance Card */
   .wealth-vault-card {
     background: linear-gradient(135deg, #121A2F 0%, #1A2542 50%, #0F1628 100%);
     border-radius: 24px;
@@ -811,9 +801,7 @@
   .activity-amount-fig.green { color: var(--cyber-mint); }
   .activity-status-lbl { font-size: 10px; color: var(--text-muted); font-weight: 600; }
 
-  /* -------------------------------------------
-     SCREEN 6: SEND MONEY (TYPO-PROOF)
-  -------------------------------------------- */
+  /* SCREEN 6: SEND MONEY */
   .view-sub-header {
     display: flex;
     align-items: center;
@@ -945,9 +933,7 @@
     pointer-events: none;
   }
 
-  /* -------------------------------------------
-     SCREEN 7: QR SCANNER VIEW
-  -------------------------------------------- */
+  /* SCREEN 7: QR SCANNER */
   .qr-camera-viewport {
     height: 280px;
     background: #090E17;
@@ -982,9 +968,7 @@
     border-radius: 16px;
   }
 
-  /* -------------------------------------------
-     SCREEN 8: BILLS & POWER TOKENS
-  -------------------------------------------- */
+  /* SCREEN 8: SMART BILLS */
   .token-voucher-card {
     background: var(--card-surface);
     border: 1px solid var(--card-border);
@@ -1133,10 +1117,10 @@
   <!-- Desktop Top Presenter Bar -->
   <header class="presenter-top-bar">
     <div class="nuv-brand-unit">
-      <div class="nuv-icon-symbol">N</div>
+      <div class="nuv-icon-symbol">M</div>
       <div class="nuv-meta-titles">
-        <h1>Nuvanta Pay — Flagship Neobank</h1>
-        <p>Architected by <span>Nuvanta Technology</span> (Dubai IFZA HQ)</p>
+        <h1>MyCash Mobile Money — Next-Gen Platform</h1>
+        <p>Architected by <span>Nuvanta Technology</span></p>
       </div>
     </div>
 
@@ -1184,15 +1168,15 @@
 
         <!-- USSD Emergency Ribbon -->
         <div class="offline-ribbon-bar" id="offlineRibbon">
-          ⚡ OFFLINE MODE: ACTIVE VIA ENCRYPTED TELECOM USSD RAIL (*789#)
+          ⚡ OFFLINE MODE: ACTIVE VIA TELECOM ENCRYPTED USSD RAIL (*789#)
         </div>
 
         <!-- SCREEN 1: SPLASH SCREEN -->
         <div class="app-screen-page active screen-splash-container" id="step-splash">
           <div>
-            <div class="splash-logo-card">N</div>
-            <h1 class="splash-brand-title">Nuvanta Pay</h1>
-            <p class="splash-brand-subtitle">The intelligent financial operating system for modern money.</p>
+            <div class="splash-logo-card">M</div>
+            <h1 class="splash-brand-title">MyCash</h1>
+            <p class="splash-brand-subtitle">The intelligent mobile money operating system for fast, secure financial life.</p>
             <div class="splash-hero-badge">
               <span>🛡️</span> Bank-Grade Encryption • Zero Fees
             </div>
@@ -1222,21 +1206,21 @@
 
             <div class="country-select-dropdown" onclick="cycleCountryCode()">
               <div style="display: flex; align-items: center; gap: 8px;">
-                <span id="countryFlag">🇦🇪</span>
-                <span id="countryName" style="font-weight: 700; font-size: 13px;">United Arab Emirates (+971)</span>
+                <span id="countryFlag">🇸🇴</span>
+                <span id="countryName" style="font-weight: 700; font-size: 13px;">Somalia & Somaliland (+252)</span>
               </div>
               <span style="font-size: 11px; color: var(--primary-indigo);">Tap to Switch</span>
             </div>
 
             <div class="phone-input-combo">
               <div class="country-code-pill">
-                <span id="countryDialCode">+971</span>
+                <span id="countryDialCode">+252</span>
               </div>
-              <input type="tel" class="phone-number-field" id="userPhoneInput" value="58 123 4567" placeholder="50 000 0000">
+              <input type="tel" class="phone-number-field" id="userPhoneInput" value="61 984 2100" placeholder="61 000 0000">
             </div>
 
             <p style="font-size: 11px; color: var(--text-slate); margin-bottom: 25px;">
-              By continuing, you agree to Nuvanta Pay's Terms of Service and Anti-Fraud Verification Policy.
+              By continuing, you agree to MyCash's Terms of Service and Anti-Fraud Verification Policy.
             </p>
 
             <button class="primary-action-btn" style="margin-top: auto;" onclick="goToStepScreen('step-otp')">
@@ -1255,7 +1239,7 @@
             </div>
 
             <h2 class="onboard-header-title">Verify Your Code</h2>
-            <p class="onboard-header-desc">Sent to <strong id="sentPhoneLabel" style="color: #FFF;">+971 58 123 4567</strong>. Auto-filling security token...</p>
+            <p class="onboard-header-desc">Sent to <strong id="sentPhoneLabel" style="color: #FFF;">+252 61 984 2100</strong>. Auto-filling security token...</p>
 
             <div class="otp-digits-row">
               <div class="otp-box-cell filled">8</div>
@@ -1314,10 +1298,10 @@
         <div class="app-screen-page" id="step-home">
           <div class="home-dash-header">
             <div class="user-badge-group">
-              <div class="user-avatar-initials">SK</div>
+              <div class="user-avatar-initials">HW</div>
               <div class="user-info-text">
-                <h3>Saklain Khan</h3>
-                <p>+971 58 123 4567 • Tier 3 Verified</p>
+                <h3>Hassan Warsame</h3>
+                <p>+252 61 984 2100 • Tier 3 Verified</p>
               </div>
             </div>
             <div style="font-size: 19px; cursor: pointer;" onclick="goToStepScreen('step-pin')">🔒</div>
@@ -1326,18 +1310,18 @@
           <!-- Luxury Balance Card -->
           <div class="wealth-vault-card">
             <div class="card-header-flex">
-              <span class="card-balance-tag">Total Vault Balance</span>
+              <span class="card-balance-tag">Primary Wallet Balance</span>
               <div class="currency-pill-toggle" onclick="toggleCurrencyMode()">
                 <span id="chipUSD" class="active">USD</span>
                 <span>/</span>
-                <span id="chipAED">AED</span>
+                <span id="chipSOS">SOS</span>
               </div>
             </div>
             <div class="balance-number-display" id="dashBalanceNumber">
-              <span class="sym">$</span>24,850.50
+              <span class="sym">$</span>4,850.50
             </div>
             <div class="balance-parity-text" id="dashBalanceParity">
-              ≈ AED 91,263.45 (Interbank Mid-Market Rate)
+              ≈ SOS 126,113,000 (Central Bank Mid-Market Parity)
             </div>
           </div>
 
@@ -1345,27 +1329,27 @@
           <div class="quick-action-grid-6">
             <div class="action-grid-card" onclick="goToStepScreen('step-send')">
               <div class="action-icon-wrapper">↗</div>
-              <span>Send</span>
+              <span>Send Money</span>
             </div>
             <div class="action-grid-card" onclick="goToStepScreen('step-qr')">
               <div class="action-icon-wrapper green">⛶</div>
-              <span>Scan QR</span>
+              <span>Merchant Pay</span>
             </div>
-            <div class="action-grid-card" onclick="showAppToast('Cash Out: Nearest agent holding $4,500 cash 100m away')">
+            <div class="action-grid-card" onclick="showAppToast('Cash Out: Nearest agent holding $2,400 cash 100m away')">
               <div class="action-icon-wrapper amber">🏧</div>
               <span>Cash Out</span>
             </div>
             <div class="action-grid-card" onclick="showAppToast('Deposit barcode ready for agent cash loading')">
               <div class="action-icon-wrapper green">📥</div>
-              <span>Deposit</span>
+              <span>Cash In</span>
             </div>
             <div class="action-grid-card" onclick="goToStepScreen('step-bills')">
               <div class="action-icon-wrapper">⚡</div>
-              <span>Bills</span>
+              <span>Pay Bills</span>
             </div>
-            <div class="action-grid-card" onclick="showAppToast('Global Remittance corridor active: UK, US, UAE')">
+            <div class="action-grid-card" onclick="showAppToast('Amal Express Remittance corridor active: UK, US, UAE')">
               <div class="action-icon-wrapper amber">🌐</div>
-              <span>Remit</span>
+              <span>Remittance</span>
             </div>
           </div>
 
@@ -1373,8 +1357,8 @@
           <div class="ai-insight-pill-box">
             <div class="ai-sparkle">✨</div>
             <div class="ai-insight-text">
-              <h5>Nuvanta AI Financial Advisor</h5>
-              <p>You saved $380 on utilities this month. On track for $5K vault target.</p>
+              <h5>MyCash AI Financial Advisor</h5>
+              <p>You saved $65 on utilities this month. On track for $5K savings goal.</p>
             </div>
           </div>
 
@@ -1384,21 +1368,21 @@
             <a href="#" onclick="goToStepScreen('step-send')">View All</a>
           </div>
           <div class="contacts-scroll-deck">
-            <div class="contact-deck-item" onclick="quickSendPrefill('Sarah Jenkins', '+971 50 444 8921')">
-              <div class="contact-circle-avatar online" style="background: rgba(79, 70, 229, 0.2); color: #818CF8;">SJ</div>
-              <span>Sarah</span>
+            <div class="contact-deck-item" onclick="quickSendPrefill('Hooyo (Mother)', '+252 61 555 1234')">
+              <div class="contact-circle-avatar online" style="background: rgba(0, 229, 153, 0.2); color: var(--cyber-mint);">HM</div>
+              <span>Hooyo</span>
             </div>
-            <div class="contact-deck-item" onclick="quickSendPrefill('Ahmed Al-Mansoori', '+971 55 981 2234')">
-              <div class="contact-circle-avatar online" style="background: rgba(0, 229, 153, 0.2); color: var(--cyber-mint);">AA</div>
-              <span>Ahmed</span>
+            <div class="contact-deck-item" onclick="quickSendPrefill('Farhan Abdi', '+252 61 888 9012')">
+              <div class="contact-circle-avatar online" style="background: rgba(79, 70, 229, 0.2); color: #818CF8;">FA</div>
+              <span>Farhan</span>
             </div>
-            <div class="contact-deck-item" onclick="quickSendPrefill('Dubai Power (DEWA)', 'ACC-89102')">
+            <div class="contact-deck-item" onclick="quickSendPrefill('Somali Power Co', 'METER-9901')">
               <div class="contact-circle-avatar" style="background: rgba(245, 158, 11, 0.2); color: var(--amber-signal);">⚡</div>
-              <span>DEWA</span>
+              <span>Power</span>
             </div>
-            <div class="contact-deck-item" onclick="quickSendPrefill('London Wire', 'UK-BARCLAYS')">
+            <div class="contact-deck-item" onclick="quickSendPrefill('Amal Express Wire', 'AMAL-HQ')">
               <div class="contact-circle-avatar" style="background: rgba(168, 85, 247, 0.2); color: #C084FC;">🌐</div>
-              <span>London</span>
+              <span>Amal</span>
             </div>
           </div>
 
@@ -1408,20 +1392,20 @@
             <a href="#" onclick="showAppToast('Official verified PDF statement downloaded')">Export PDF</a>
           </div>
           <div class="activity-feed-deck">
-            <div class="activity-row-card" onclick="showAppToast('Receipt #TX-908122 for Sarah Jenkins (-$75.00) downloaded')">
+            <div class="activity-row-card" onclick="showAppToast('Receipt #TX-908122 for Farhan Abdi (-$35.00) downloaded')">
               <div class="activity-row-left">
                 <div class="activity-icon-sq">↗</div>
                 <div class="activity-text-meta">
-                  <h5>Transfer to Sarah Jenkins</h5>
+                  <h5>Transfer to Farhan Abdi</h5>
                   <p>P2P Instant • Today 11:20</p>
                 </div>
               </div>
               <div class="activity-row-right">
-                <div class="activity-amount-fig">-$75.00</div>
+                <div class="activity-amount-fig">-$35.00</div>
                 <div class="activity-status-lbl">Completed</div>
               </div>
             </div>
-            <div class="activity-row-card" onclick="showAppToast('Receipt #TX-908121 for Payroll (+$4,250.00) downloaded')">
+            <div class="activity-row-card" onclick="showAppToast('Receipt #TX-908121 for Payroll (+$1,850.00) downloaded')">
               <div class="activity-row-left">
                 <div class="activity-icon-sq" style="color: var(--cyber-mint);">↓</div>
                 <div class="activity-text-meta">
@@ -1430,7 +1414,7 @@
                 </div>
               </div>
               <div class="activity-row-right">
-                <div class="activity-amount-fig green">+$4,250.00</div>
+                <div class="activity-amount-fig green">+$1,850.00</div>
                 <div class="activity-status-lbl">Instant Credit</div>
               </div>
             </div>
@@ -1447,10 +1431,10 @@
 
           <div class="verified-target-card">
             <div class="target-profile-flex">
-              <div class="target-avatar-circle" id="targetAvatarInitials">SJ</div>
+              <div class="target-avatar-circle" id="targetAvatarInitials">FA</div>
               <div class="target-title-block">
-                <h4 id="targetProfileName">Sarah Jenkins <span class="verified-shield-pill">VERIFIED ID</span></h4>
-                <p id="targetProfilePhone">+971 50 444 8921 • Central Bank Fast Rail</p>
+                <h4 id="targetProfileName">Farhan Abdi <span class="verified-shield-pill">VERIFIED ID</span></h4>
+                <p id="targetProfilePhone">+252 61 888 9012 • Somali Central Bank Rail</p>
               </div>
             </div>
             <span style="font-size: 11.5px; color: #818CF8; font-weight: 700; cursor: pointer;" onclick="changeRecipientPrompt()">Change</span>
@@ -1459,15 +1443,15 @@
           <div class="send-amount-key-dial">
             <label>Transfer Amount</label>
             <div class="send-figure-hero">
-              <span>$</span><span id="sendFigureText">120.00</span>
+              <span>$</span><span id="sendFigureText">50.00</span>
             </div>
-            <p style="font-size: 11px; color: var(--text-muted);">Network Fee: $0.00 (Zero-Fee Nuvanta Rail)</p>
+            <p style="font-size: 11px; color: var(--text-muted);">Network Fee: $0.00 (Zero-Fee MyCash Wallet)</p>
           </div>
 
           <!-- Slide to Confirm Slider -->
           <div class="slide-rail-widget" onclick="executeP2PSlide()">
             <div class="slide-rail-handle" id="sliderP2PHandle">➔</div>
-            <div class="slide-rail-caption">SLIDE TO TRANSFER $120.00</div>
+            <div class="slide-rail-caption">SLIDE TO TRANSFER $50.00</div>
           </div>
         </div>
 
@@ -1490,7 +1474,7 @@
           </div>
 
           <button class="primary-action-btn" onclick="simulateMerchantCheckout()">
-            Simulate Merchant Checkout ($34.50)
+            Simulate Merchant Checkout ($18.50)
           </button>
         </div>
 
@@ -1507,7 +1491,7 @@
               <div class="action-icon-wrapper amber">⚡</div>
               <span>Prepaid Power Token</span>
             </div>
-            <div class="action-grid-card" onclick="showAppToast('Recharged 25GB 5G High-Speed Data!')">
+            <div class="action-grid-card" onclick="showAppToast('Recharged 15GB 5G High-Speed Bundle!')">
               <div class="action-icon-wrapper green">📶</div>
               <span>5G Data Bundles</span>
             </div>
@@ -1516,7 +1500,7 @@
           <div class="token-voucher-card" id="powerVoucherCard" style="display: none;">
             <h5 style="font-size: 11px; color: var(--text-slate); text-transform: uppercase;">20-Digit Power Token Generated</h5>
             <div class="token-code-digits" id="powerVoucherDigits">4812 - 9901 - 7734 - 1102</div>
-            <p style="font-size: 11px; color: var(--text-slate); margin-bottom: 8px;">Units Credited: 65.0 kWh • Meter #8812</p>
+            <p style="font-size: 11px; color: var(--text-slate); margin-bottom: 8px;">Units Credited: 52.4 kWh • Meter #9901</p>
             <button class="secondary-action-btn" style="height: 40px; font-size: 12px;" onclick="copyTokenVoucher()">Copy Token Code</button>
           </div>
         </div>
@@ -1557,7 +1541,7 @@
     <!-- Desktop Specifications Panel -->
     <div class="presenter-spec-panel">
       <h2>
-        <span>🛡️</span> Nuvanta Neobank Cockpit
+        <span>🛡️</span> MyCash Neobank Cockpit
       </h2>
 
       <div class="spec-info-card">
@@ -1586,7 +1570,7 @@
       <div class="spec-info-card">
         <h5>Typo-Proof & Safety Shield</h5>
         <p>
-          Pre-validates legal beneficiary name before PIN entry. 5-second emergency hold buffer allows zero-fee instant payment retraction.
+          Pre-validates legal beneficiary name before PIN entry. 10-second emergency hold buffer allows zero-fee instant payment retraction.
         </p>
       </div>
     </div>
@@ -1596,7 +1580,7 @@
 </div>
 
 <script>
-  // Web Audio Chime for realistic soundbox & payment feedback
+  // Web Audio Chime
   function playSuccessChime() {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -1616,8 +1600,8 @@
 
   // Country code switcher
   const countries = [
-    { flag: "🇦🇪", name: "United Arab Emirates (+971)", code: "+971", phone: "58 123 4567" },
     { flag: "🇸🇴", name: "Somalia & Somaliland (+252)", code: "+252", phone: "61 984 2100" },
+    { flag: "🇦🇪", name: "United Arab Emirates (+971)", code: "+971", phone: "58 123 4567" },
     { flag: "🇺🇸", name: "United States (+1)", code: "+1", phone: "415 555 2671" },
     { flag: "🇬🇧", name: "United Kingdom (+44)", code: "+44", phone: "7911 123456" },
     { flag: "🇰🇪", name: "Kenya (+254)", code: "+254", phone: "712 345 678" }
@@ -1671,7 +1655,7 @@
     } else if (stepId === 'step-home') {
       specDesc.innerHTML = "<strong>Step 5: Home Wealth Dashboard</strong><br>Multi-currency liquid balance, 6 core actions, AI Advisor, and quick contacts.";
     } else if (stepId === 'step-send') {
-      specDesc.innerHTML = "<strong>Step 6: Typo-Proof P2P Transfer</strong><br>Pre-validates recipient identity before PIN. Slide-to-pay with 5s cancel hold.";
+      specDesc.innerHTML = "<strong>Step 6: Typo-Proof P2P Transfer</strong><br>Pre-validates recipient identity before PIN. Slide-to-pay with 10s cancel hold.";
     } else if (stepId === 'step-qr') {
       specDesc.innerHTML = "<strong>Step 7: Universal QR & Soundbox</strong><br>Sub-100ms merchant barcode recognition + instant soundbox audio chime.";
     } else if (stepId === 'step-bills') {
@@ -1708,17 +1692,17 @@
     const balanceNum = document.getElementById('dashBalanceNumber');
     const balanceParity = document.getElementById('dashBalanceParity');
     const chipUSD = document.getElementById('chipUSD');
-    const chipAED = document.getElementById('chipAED');
+    const chipSOS = document.getElementById('chipSOS');
 
     if (isUSDMode) {
-      balanceNum.innerHTML = '<span class="sym">$</span>24,850.50';
-      balanceParity.innerText = '≈ AED 91,263.45 (Interbank Mid-Market Rate)';
+      balanceNum.innerHTML = '<span class="sym">$</span>4,850.50';
+      balanceParity.innerText = '≈ SOS 126,113,000 (Central Bank Mid-Market Parity)';
       chipUSD.classList.add('active');
-      chipAED.classList.remove('active');
+      chipSOS.classList.remove('active');
     } else {
-      balanceNum.innerHTML = '<span class="sym">AED </span>91,263.45';
-      balanceParity.innerText = '≈ $24,850.50 USD (Exchange Rate: 1 USD = 3.6725 AED)';
-      chipAED.classList.add('active');
+      balanceNum.innerHTML = '<span class="sym">SOS </span>126,113,000';
+      balanceParity.innerText = '≈ $4,850.50 USD (Exchange Rate: 1 USD = 26,000 SOS)';
+      chipSOS.classList.add('active');
       chipUSD.classList.remove('active');
     }
   }
@@ -1726,17 +1710,17 @@
   // Quick Send Prefill
   function quickSendPrefill(name, phone) {
     document.getElementById('targetProfileName').innerHTML = name + ' <span class="verified-shield-pill">VERIFIED ID</span>';
-    document.getElementById('targetProfilePhone').innerText = phone + ' • Central Bank Fast Rail';
+    document.getElementById('targetProfilePhone').innerText = phone + ' • Somali Central Bank Rail';
     document.getElementById('targetAvatarInitials').innerText = name.substring(0, 2).toUpperCase();
     goToStepScreen('step-send');
   }
 
   function changeRecipientPrompt() {
-    const newName = prompt("Enter recipient name or mobile number:", "Karim Al-Hassan (+971 52 888 1200)");
+    const newName = prompt("Enter recipient name or mobile number:", "Hassan Warsame (+252 61 777 3300)");
     if (newName) {
-      document.getElementById('targetProfileName').innerHTML = 'Karim Al-Hassan <span class="verified-shield-pill">VERIFIED ID</span>';
-      document.getElementById('targetProfilePhone').innerText = '+971 52 888 1200 • Verified Nuvanta User';
-      document.getElementById('targetAvatarInitials').innerText = 'KH';
+      document.getElementById('targetProfileName').innerHTML = 'Hassan Warsame <span class="verified-shield-pill">VERIFIED ID</span>';
+      document.getElementById('targetProfilePhone').innerText = '+252 61 777 3300 • Verified MyCash User';
+      document.getElementById('targetAvatarInitials').innerText = 'HW';
     }
   }
 
@@ -1746,7 +1730,7 @@
     handle.style.transform = "translateX(275px)";
     setTimeout(() => {
       playSuccessChime();
-      showAppToast("Payment of $120.00 Sent! 10-second emergency Undo buffer active.");
+      showAppToast("Payment of $50.00 Sent! 10-second emergency Undo buffer active.");
       handle.style.transform = "translateX(0)";
       setTimeout(() => goToStepScreen('step-home'), 1200);
     }, 280);
@@ -1755,14 +1739,14 @@
   // Merchant Checkout
   function simulateMerchantCheckout() {
     playSuccessChime();
-    showAppToast("Merchant Verified: Marina City Mart ($34.50) Paid! Soundbox audio chime confirmed.");
+    showAppToast("Merchant Verified: Mogadishu City Mart ($18.50) Paid! Soundbox audio chime confirmed.");
   }
 
   // Power Voucher
   function generatePowerVoucher() {
     playSuccessChime();
     document.getElementById('powerVoucherCard').style.display = 'block';
-    showAppToast("Prepaid power token generated for Meter #8812 (65.0 kWh)");
+    showAppToast("Prepaid power token generated for Meter #9901 (52.4 kWh)");
   }
   function copyTokenVoucher() {
     navigator.clipboard?.writeText("4812990177341102");

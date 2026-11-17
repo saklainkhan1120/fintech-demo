@@ -1,13 +1,19 @@
 {
-  "name": "nuvanta-fintech",
+  "name": "mycash-fintech",
   "version": "1.0.0",
-  "description": "Nuvanta Pay — Next-Gen Neobank & Mobile Financial Operating System",
+  "description": "MyCash — Next-Gen Mobile Money & Financial Operating System",
   "scripts": {
     "start": "npx serve public -p 3000",
     "dev": "npx serve public -p 3000",
-    "deploy": "npx wrangler pages deploy public --project-name=nuvanta-pay"
+    "deploy": "npx wrangler pages deploy public --project-name=mycash-app"
   },
-  "keywords": ["fintech", "neobank", "mobile-money", "nuvanta", "payments"],
-  "author": "Saklain Khan (Nuvanta Technologies FZCO)",
+  "keywords": [
+    "fintech",
+    "mobile-money",
+    "mycash",
+    "payments",
+    "nuvanta"
+  ],
+  "author": "Nuvanta Technology",
   "license": "UNLICENSED"
 }

@@ -1,586 +1,666 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Next-Gen Mobile Money & Neobank Architecture Proposal — Nuvanta Technology</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --fintech-indigo: #4F46E5;
-    --fintech-indigo-dark: #3730A3;
-    --fintech-indigo-light: #EEF2FF;
-    --growth-emerald: #10B981;
-    --growth-emerald-bg: #ECFDF5;
-    --growth-emerald-dark: #047857;
-    --charcoal-dark: #0F172A;
-    --slate-body: #334155;
-    --slate-muted: #64748B;
-    --surface-light: #F8FAFC;
-    --border-light: #E2E8F0;
-    --amber-tag: #F59E0B;
-    --font-heading: 'Plus Jakarta Sans', sans-serif;
-    --font-body: 'Inter', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyCash Next-Gen Mobile Money Architecture Proposal — Nuvanta Technology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --fintech-indigo: #4F46E5;
+      --fintech-indigo-dark: #3730A3;
+      --fintech-indigo-light: #EEF2FF;
+      --growth-emerald: #10B981;
+      --growth-emerald-bg: #ECFDF5;
+      --growth-emerald-dark: #047857;
+      --charcoal-dark: #0F172A;
+      --slate-body: #334155;
+      --slate-muted: #64748B;
+      --surface-light: #F8FAFC;
+      --border-light: #E2E8F0;
+      --amber-tag: #F59E0B;
+      --font-heading: 'Plus Jakarta Sans', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: var(--font-body);
-    color: var(--charcoal-dark);
-    background-color: #F1F5F9;
-    line-height: 1.6;
-    font-size: 13.5px;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  .proposal-document {
-    max-width: 900px;
-    margin: 30px auto;
-    background: #FFFFFF;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.06);
-    border-radius: 14px;
-    overflow: hidden;
-  }
+    body {
+      font-family: var(--font-body);
+      color: var(--charcoal-dark);
+      background-color: #F1F5F9;
+      line-height: 1.6;
+      font-size: 13.5px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
 
-  /* Header Cover Banner */
-  .cover-banner {
-    background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 60%, #312E81 100%);
-    color: #FFFFFF;
-    padding: 55px 50px 40px;
-    position: relative;
-    border-bottom: 4px solid var(--fintech-indigo);
-  }
+    .proposal-document {
+      max-width: 900px;
+      margin: 30px auto;
+      background: #FFFFFF;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+      border-radius: 14px;
+      overflow: hidden;
+    }
 
-  .brand-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 35px;
-  }
+    /* Header Cover Banner */
+    .cover-banner {
+      background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 60%, #312E81 100%);
+      color: #FFFFFF;
+      padding: 55px 50px 40px;
+      position: relative;
+      border-bottom: 4px solid var(--fintech-indigo);
+    }
 
-  .nuv-logo-unit {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+    .brand-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 35px;
+    }
 
-  .logo-box {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, #4F46E5, #00E599);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 20px;
-    color: #FFFFFF;
-    box-shadow: 0 4px 18px rgba(79, 70, 229, 0.45);
-  }
+    .nuv-logo-unit {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-  .brand-labels h2 {
-    font-family: var(--font-heading);
-    font-size: 19px;
-    font-weight: 800;
-    letter-spacing: -0.4px;
-    color: #FFFFFF;
-  }
-  .brand-labels span {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #A5B4FC;
-    font-weight: 700;
-  }
+    .logo-box {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #4F46E5, #00E599);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 20px;
+      color: #FFFFFF;
+      box-shadow: 0 4px 18px rgba(79, 70, 229, 0.45);
+    }
 
-  .confidential-tag {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 700;
-    color: #E2E8F0;
-  }
+    .brand-labels h2 {
+      font-family: var(--font-heading);
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: #FFFFFF;
+    }
 
-  .proposal-headline {
-    font-family: var(--font-heading);
-    font-size: 30px;
-    font-weight: 800;
-    line-height: 1.25;
-    margin-bottom: 14px;
-    letter-spacing: -0.6px;
-  }
-  .proposal-headline span {
-    color: #A5B4FC;
-  }
+    .brand-labels span {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #A5B4FC;
+      font-weight: 700;
+    }
 
-  .proposal-sub {
-    font-size: 14px;
-    color: #CBD5E1;
-    max-width: 740px;
-    line-height: 1.6;
-    margin-bottom: 28px;
-  }
+    .confidential-tag {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #E2E8F0;
+    }
 
-  .meta-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    padding-top: 22px;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-  }
-  .meta-box .lbl {
-    font-size: 10.5px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #94A3B8;
-    margin-bottom: 4px;
-  }
-  .meta-box .val {
-    font-size: 12.5px;
-    font-weight: 700;
-    color: #FFFFFF;
-    font-family: var(--font-heading);
-  }
+    .proposal-headline {
+      font-family: var(--font-heading);
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 14px;
+      letter-spacing: -0.6px;
+    }
 
-  /* Body Content */
-  .proposal-body {
-    padding: 40px 50px;
-  }
+    .proposal-headline span {
+      color: #A5B4FC;
+    }
 
-  h2.block-heading {
-    font-family: var(--font-heading);
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--charcoal-dark);
-    letter-spacing: -0.4px;
-    margin-top: 36px;
-    margin-bottom: 18px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--border-light);
-  }
-  h2.block-heading:first-of-type {
-    margin-top: 0;
-  }
+    .proposal-sub {
+      font-size: 14px;
+      color: #CBD5E1;
+      max-width: 740px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
 
-  .block-badge-num {
-    background: var(--fintech-indigo);
-    color: #FFFFFF;
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 800;
-  }
+    .meta-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
 
-  p {
-    color: var(--slate-body);
-    margin-bottom: 14px;
-    font-size: 13.5px;
-  }
+    .meta-box .lbl {
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #94A3B8;
+      margin-bottom: 4px;
+    }
 
-  /* Comparison Table */
-  .table-box {
-    width: 100%;
-    margin: 18px 0;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid var(--border-light);
-  }
+    .meta-box .val {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #FFFFFF;
+      font-family: var(--font-heading);
+    }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12.5px;
-    text-align: left;
-  }
+    /* Body Content */
+    .proposal-body {
+      padding: 40px 50px;
+    }
 
-  thead {
-    background: var(--charcoal-dark);
-    color: #FFFFFF;
-  }
+    h2.block-heading {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--charcoal-dark);
+      letter-spacing: -0.4px;
+      margin-top: 36px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border-light);
+    }
 
-  th {
-    padding: 11px 14px;
-    font-weight: 700;
-    font-family: var(--font-heading);
-    letter-spacing: 0.2px;
-    font-size: 12px;
-  }
+    h2.block-heading:first-of-type {
+      margin-top: 0;
+    }
 
-  td {
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--border-light);
-    vertical-align: top;
-    color: var(--slate-body);
-  }
+    .block-badge-num {
+      background: var(--fintech-indigo);
+      color: #FFFFFF;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+    }
 
-  tr:nth-child(even) { background-color: #F8FAFC; }
-  tr:last-child td { border-bottom: none; }
+    p {
+      color: var(--slate-body);
+      margin-bottom: 14px;
+      font-size: 13.5px;
+    }
 
-  /* Phased Cards */
-  .phase-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin: 20px 0;
-  }
-  .phase-card {
-    border: 1px solid #E2E8F0;
-    border-radius: 10px;
-    padding: 18px;
-    background: #FFFFFF;
-    border-left: 4px solid var(--fintech-indigo);
-  }
-  .phase-card.green-accent { border-left-color: var(--growth-emerald); }
-  .phase-card.amber-accent { border-left-color: var(--amber-tag); }
+    /* Comparison Table */
+    .table-box {
+      width: 100%;
+      margin: 18px 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border-light);
+    }
 
-  .phase-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-  .phase-card-header h4 {
-    font-family: var(--font-heading);
-    font-size: 15px;
-    font-weight: 800;
-    color: #0F172A;
-  }
-  .phase-pill {
-    font-size: 10px;
-    font-weight: 700;
-    padding: 3px 8px;
-    border-radius: 12px;
-    background: var(--fintech-indigo-light);
-    color: var(--fintech-indigo);
-  }
-  .phase-card p {
-    font-size: 12.5px;
-    margin-bottom: 6px;
-    color: #475569;
-  }
-  .phase-card ul {
-    margin-left: 18px;
-    font-size: 12px;
-    color: #334155;
-  }
-  .phase-card li { margin-bottom: 3px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      text-align: left;
+    }
 
-  /* Callout */
-  .highlight-quote {
-    background: #EEF2FF;
-    border-left: 4px solid var(--fintech-indigo);
-    padding: 16px 20px;
-    border-radius: 0 10px 10px 0;
-    margin: 20px 0;
-  }
-  .highlight-quote p {
-    margin: 0;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--fintech-indigo-dark);
-  }
+    thead {
+      background: var(--charcoal-dark);
+      color: #FFFFFF;
+    }
 
-  .proposal-bottom {
-    background: #0F172A;
-    color: #94A3B8;
-    padding: 30px 50px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 11.5px;
-  }
-  .proposal-bottom a { color: #818CF8; text-decoration: none; font-weight: 700; }
+    th {
+      padding: 11px 14px;
+      font-weight: 700;
+      font-family: var(--font-heading);
+      letter-spacing: 0.2px;
+      font-size: 12px;
+    }
 
-  @media print {
-    body { background: #FFFFFF; }
-    .proposal-document { box-shadow: none; margin: 0; max-width: 100%; border-radius: 0; }
-    .page-break { page-break-before: always; }
-  }
-</style>
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: top;
+      color: var(--slate-body);
+    }
+
+    tr:nth-child(even) {
+      background-color: #F8FAFC;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Phased Cards */
+    .phase-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin: 20px 0;
+    }
+
+    .phase-card {
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      padding: 18px;
+      background: #FFFFFF;
+      border-left: 4px solid var(--fintech-indigo);
+    }
+
+    .phase-card.green-accent {
+      border-left-color: var(--growth-emerald);
+    }
+
+    .phase-card.amber-accent {
+      border-left-color: var(--amber-tag);
+    }
+
+    .phase-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .phase-card-header h4 {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 800;
+      color: #0F172A;
+    }
+
+    .phase-pill {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: var(--fintech-indigo-light);
+      color: var(--fintech-indigo);
+    }
+
+    .phase-card p {
+      font-size: 12.5px;
+      margin-bottom: 6px;
+      color: #475569;
+    }
+
+    .phase-card ul {
+      margin-left: 18px;
+      font-size: 12px;
+      color: #334155;
+    }
+
+    .phase-card li {
+      margin-bottom: 3px;
+    }
+
+    /* Callout */
+    .highlight-quote {
+      background: #EEF2FF;
+      border-left: 4px solid var(--fintech-indigo);
+      padding: 16px 20px;
+      border-radius: 0 10px 10px 0;
+      margin: 20px 0;
+    }
+
+    .highlight-quote p {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--fintech-indigo-dark);
+    }
+
+    .proposal-bottom {
+      background: #0F172A;
+      color: #94A3B8;
+      padding: 30px 50px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+    }
+
+    .proposal-bottom a {
+      color: #818CF8;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media print {
+      body {
+        background: #FFFFFF;
+      }
+
+      .proposal-document {
+        box-shadow: none;
+        margin: 0;
+        max-width: 100%;
+        border-radius: 0;
+      }
+
+      .page-break {
+        page-break-before: always;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="proposal-document">
+  <div class="proposal-document">
 
-  <!-- Cover Header -->
-  <div class="cover-banner">
-    <div class="brand-row">
-      <div class="nuv-logo-unit">
-        <div class="logo-box">N</div>
-        <div class="brand-labels">
-          <h2>NUVANTA TECHNOLOGY</h2>
-          <span>Enterprise & FinTech Solutions</span>
+    <!-- Cover Header -->
+    <div class="cover-banner">
+      <div class="brand-row">
+        <div class="nuv-logo-unit">
+          <div class="logo-box">N</div>
+          <div class="brand-labels">
+            <h2>NUVANTA TECHNOLOGY</h2>
+            <span>Enterprise & FinTech Solutions</span>
+          </div>
         </div>
-      </div>
-      <div class="confidential-tag">PRODUCT PROPOSAL</div>
-    </div>
-
-    <h1 class="proposal-headline">
-      Next-Gen Mobile Money & Neobank:<br>
-      The <span>Nuvanta Pay</span> Architecture Solution
-    </h1>
-    <p class="proposal-sub">
-      A comprehensive, client-focused architectural proposal and technical blueprint designed to establish regional market dominance by resolving the core operational failures of legacy mobile money applications.
-    </p>
-
-    <div class="meta-stats">
-      <div class="meta-box">
-        <div class="lbl">Solution Overview</div>
-        <div class="val">Next-Gen FinTech Platform</div>
-      </div>
-      <div class="meta-box">
-        <div class="lbl">Prepared By</div>
-        <div class="val">Nuvanta Technology</div>
-      </div>
-      <div class="meta-box">
-        <div class="lbl">Classification</div>
-        <div class="val">Confidential & Proprietary</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Body Content -->
-  <div class="proposal-body">
-
-    <!-- Section 1: Executive Overview -->
-    <h2 class="block-heading"><span class="block-badge-num">01</span> Client Focus: Market Demand & Industry Pain Points</h2>
-    <p>
-      In high-growth mobile financial markets, over 85% of retail commerce and daily settlements rely on mobile money. However, existing market applications (such as traditional telco wallet benchmarks) suffer from critical friction points that limit user trust and trigger costly customer support disputes:
-    </p>
-
-    <div class="table-box">
-      <table>
-        <thead>
-          <tr>
-            <th>Core User Pain Point</th>
-            <th>How Reference / Legacy Apps Fail</th>
-            <th>How Nuvanta Pay Wins The Market</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>1. Wrong Number Panic & Disputes</strong></td>
-            <td>Typing one wrong digit transfers life savings to a stranger; no recipient name is shown before sending.</td>
-            <td><strong>Zero-Typo Safety Shield:</strong> Real-time recipient avatar, legal name, and verified ID badge shown <em>before</em> sending + <strong>10-Second Undo Hold Buffer</strong>.</td>
-          </tr>
-          <tr>
-            <td><strong>2. Network Blackouts & Congestion</strong></td>
-            <td>When 3G/4G connectivity drops, apps freeze completely, stranding users and merchants at checkouts.</td>
-            <td><strong>Dual-Rail Offline Engine:</strong> Automatically tunnels transactions via encrypted background USSD (<code>*789#</code>) with <strong>100% financial uptime anywhere</strong>.</td>
-          </tr>
-          <tr>
-            <td><strong>3. Merchant Checkout Bottlenecks</strong></td>
-            <td>Cashiers manually inspect SMS notifications in crowded stores, leading to lines and fraud disputes.</td>
-            <td><strong>Sub-100ms QR + Audio Soundbox:</strong> Speaks instant voice confirmations in Somali, Arabic, or English upon payment.</td>
-          </tr>
-          <tr>
-            <td><strong>4. Hidden Remittance Spreads</strong></td>
-            <td>Diaspora sending billions annually lose 5-8% in hidden foreign exchange spreads.</td>
-            <td><strong>Zero-Markup Corridor:</strong> Transparent real-time mid-market rates with 1-tap direct wallet auto-deposit.</td>
-          </tr>
-          <tr>
-            <td><strong>5. Financial Blindness</strong></td>
-            <td>Flat unsearchable SMS text list with zero categorization or tax invoice records.</td>
-            <td><strong>AI Financial Advisor & Ledger:</strong> Categorizes food, bills, and rent automatically, plus generates branded PDF receipts with QR verification stamps.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Section 2: Reference App vs What We Are Building -->
-    <h2 class="block-heading"><span class="block-badge-num">02</span> Feature Comparison: Reference App vs. Nuvanta Pay</h2>
-    <p>
-      We have thoroughly analyzed the client's reference application. Below is an exact feature-by-feature breakdown of how Nuvanta Pay elevates every single capability into an enterprise neobank experience:
-    </p>
-
-    <div class="table-box">
-      <table>
-        <thead>
-          <tr>
-            <th>Module</th>
-            <th>Reference App Execution</th>
-            <th>Nuvanta Pay Engineered Breakthrough</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>P2P Money Transfers</strong></td>
-            <td>Basic phone input; recipient verified only after funds leave the wallet.</td>
-            <td><strong>Pre-Validation & Grace Buffer:</strong> Instant legal name check, slide-to-confirm rail, and 10-second instant cancellation buffer.</td>
-          </tr>
-          <tr>
-            <td><strong>Merchant QR Payments</strong></td>
-            <td>Slow camera scan requiring manual merchant ID typing as fallback.</td>
-            <td><strong>Universal High-Speed Scanner:</strong> Sub-100ms camera lock on EMVCo codes + instant audio soundbox chime.</td>
-          </tr>
-          <tr>
-            <td><strong>Cash In & Cash Out</strong></td>
-            <td>Static forms requiring users to wander looking for physical cash agents.</td>
-            <td><strong>Dynamic Agent Radar:</strong> 15-minute secure withdrawal token + live GPS map showing agent cash liquidity ($4,500 cash ready).</td>
-          </tr>
-          <tr>
-            <td><strong>Utility & Bill Payments</strong></td>
-            <td>Manual meter typing with delayed receipt confirmations.</td>
-            <td><strong>1-Tap Smart Utility Generator:</strong> Saved meters + automated 20-digit prepaid electricity token generation with 1-tap copy.</td>
-          </tr>
-          <tr>
-            <td><strong>Authentication & Security</strong></td>
-            <td>Static 4-digit PIN stored in unhardened app storage; vulnerable to shoulder-surfing.</td>
-            <td><strong>Hardware Secure Enclave & Shuffled Keypad:</strong> Biometric FaceID/TouchID + randomized PIN pad defeats heat-maps.</td>
-          </tr>
-          <tr>
-            <td><strong>Ecosystem & Multi-Currency</strong></td>
-            <td>Single currency ledger; delayed conversions and manual balance inquiries.</td>
-            <td><strong>Liquid Dual-Currency Vault:</strong> Instant 1-tap toggle between USD and Local Currency with live mid-market parity.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Page Break -->
-    <div class="page-break"></div>
-
-    <!-- Section 3: Phased Strategy -->
-    <h2 class="block-heading"><span class="block-badge-num">03</span> Phased Implementation & Delivery Roadmap</h2>
-    <div class="phase-stack">
-      <div class="phase-card">
-        <div class="phase-card-header">
-          <h4>Phase 1: Architecture & Sub-Second Core Foundation</h4>
-          <span class="phase-pill">Weeks 1 – 4</span>
-        </div>
-        <p>Deliver the complete core wallet engine on modern Flutter 3.x Clean Architecture.</p>
-        <ul>
-          <li>Splash, phone registration, OTP verification, and biometric PIN setup.</li>
-          <li>Sub-second P2P transfers, Cash In/Out tokens, Merchant QR Pay, and Telco billers.</li>
-          <li>Drift SQLite local database with reactive state management via Riverpod 2.0.</li>
-        </ul>
+        <div class="confidential-tag">PRODUCT PROPOSAL</div>
       </div>
 
-      <div class="phase-card green-accent">
-        <div class="phase-card-header">
-          <h4>Phase 2: Trust Engineering & Safety Shield</h4>
-          <span class="phase-pill" style="background: #ECFDF5; color: #047857;">Weeks 5 – 8</span>
-        </div>
-        <p>Deploy cutting-edge safety features that eliminate consumer fear and transaction disputes.</p>
-        <ul>
-          <li><strong>Typo-Proof Pre-Validation:</strong> Recipient name & avatar confirmed before payment dispatch.</li>
-          <li><strong>10-Second Emergency Hold:</strong> Instant cancellation buffer reduces customer support disputes by 80%.</li>
-          <li><strong>Biometric Hardware Enclave:</strong> FaceID / TouchID authentication + randomized scrambled keypad to defeat heat-maps.</li>
-          <li><strong>Dual-Currency Parity:</strong> Real-time 1-tap toggle between USD and Local Currency with live mid-market ticker.</li>
-        </ul>
-      </div>
-
-      <div class="phase-card amber-accent">
-        <div class="phase-card-header">
-          <h4>Phase 3: The Competitive Edge (Unmatched Capabilities)</h4>
-          <span class="phase-pill" style="background: #FEF3C7; color: #B45309;">Weeks 9 – 12</span>
-        </div>
-        <p>Integrate breakthrough features that set the app far ahead of regional competitors.</p>
-        <ul>
-          <li><strong>Dual-Rail Offline Resilience (USSD Bridge):</strong> Background encrypted USSD shortcodes (<code>*789#</code>) ensure zero transaction loss during internet blackouts.</li>
-          <li><strong>Agent GPS Radar with Live Liquidity:</strong> Users see exact cash availability at nearby agents.</li>
-          <li><strong>Interactive AI Ledger:</strong> Automatic spending categorization (Food, Bills, Rent) and branded QR-stamped PDF receipts.</li>
-          <li><strong>Diaspora Remittance Tracker:</strong> Real-time tracking of incoming transfers from UK, US, UAE, and Europe.</li>
-        </ul>
-      </div>
-
-      <div class="phase-card">
-        <div class="phase-card-header">
-          <h4>Phase 4: Regulatory Compliance, Scaling & Production Launch</h4>
-          <span class="phase-pill">Weeks 13 – 14</span>
-        </div>
-        <p>Final hardening, penetration audits, and phased app store deployment.</p>
-        <ul>
-          <li>Central Bank regulatory compliance and PCI-DSS Level 1 security sign-offs.</li>
-          <li>Load testing benchmarked up to 15,000 transactions per second (TPS) peak capacity.</li>
-          <li>Closed beta with 1,000 active subscribers followed by nationwide Google Play & App Store rollout.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Section 4: Tech Stack & ROI -->
-    <h2 class="block-heading"><span class="block-badge-num">04</span> Enterprise Technology Stack & Justification</h2>
-    <div class="table-box">
-      <table>
-        <thead>
-          <tr>
-            <th>Technology Component</th>
-            <th>Why We Use It (Kyu)</th>
-            <th>Business & Tech Benefit (Fayda)</th>
-            <th>Implementation Method (Kaise)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Flutter 3.x (Dart)</strong></td>
-            <td>Native ARM64 direct compilation; no JavaScript bridge.</td>
-            <td>Flawless 60/120 FPS on budget $50 phones and flagship iPhones alike; 45% lower dev costs.</td>
-            <td>Feature-first Clean Architecture with strictly immutable models via Freezed.</td>
-          </tr>
-          <tr>
-            <td><strong>Riverpod 2.0</strong></td>
-            <td>Compile-time safe reactive dependency injection.</td>
-            <td>Zero race-conditions during simultaneous transfers or network socket events.</td>
-            <td>AsyncNotifier providers with auto-disposing listeners and 100% test mocking.</td>
-          </tr>
-          <tr>
-            <td><strong>Drift SQLite + CRDT</strong></td>
-            <td>Type-safe local relational storage with Conflict-Free sync.</td>
-            <td>Instant app open in &lt;50ms; full transaction history readable in offline mode.</td>
-            <td>Optimistic local commits synced automatically when connection restores.</td>
-          </tr>
-          <tr>
-            <td><strong>Go & Rust Microservices</strong></td>
-            <td>Goroutine concurrency; Rust for double-entry financial ledger.</td>
-            <td>25,000+ TPS throughput with mathematical precision and zero memory leaks.</td>
-            <td>Event-sourcing append-only ledger; no raw database balances overwritten.</td>
-          </tr>
-          <tr>
-            <td><strong>Neon Serverless Postgres</strong></td>
-            <td>ACID relational database with instant auto-scaling and branch recovery.</td>
-            <td>Zero double-spending during peak surges (Eid, payroll days).</td>
-            <td>Row-level locking (`SELECT FOR UPDATE`) + Redis distributed locks.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="highlight-quote">
-      <p>
-        <strong>Cloudflare Ready Prototype Simulator Included:</strong> The interactive prototype is completely self-contained in <code>public/index.html</code>. It can be deployed directly to <strong>Cloudflare Pages</strong> or hosted on any domain with zero backend dependencies.
+      <h1 class="proposal-headline">
+        Next-Gen Mobile Money Transformation:<br>
+        The <span>MyCash</span> Architecture Blueprint
+      </h1>
+      <p class="proposal-sub">
+        A comprehensive, client-focused architectural proposal and technical blueprint designed to establish regional
+        market dominance by resolving the core operational failures of legacy mobile money applications.
       </p>
+
+      <div class="meta-stats">
+        <div class="meta-box">
+          <div class="lbl">Solution Overview</div>
+          <div class="val">Next-Gen FinTech Platform</div>
+        </div>
+        <div class="meta-box">
+          <div class="lbl">Prepared By</div>
+          <div class="val">Nuvanta Technology</div>
+        </div>
+        <div class="meta-box">
+          <div class="lbl">Classification</div>
+          <div class="val">Confidential & Proprietary</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body Content -->
+    <div class="proposal-body">
+
+      <!-- Section 1: Executive Overview -->
+      <h2 class="block-heading"><span class="block-badge-num">01</span> Client Focus: Market Demand & Industry Pain
+        Points</h2>
+      <p>
+        In high-growth mobile financial markets, over 85% of retail commerce and daily settlements rely on mobile money.
+        However, existing market applications (such as traditional telco wallet benchmarks) suffer from critical
+        friction points that limit user trust and trigger costly customer support disputes:
+      </p>
+
+      <div class="table-box">
+        <table>
+          <thead>
+            <tr>
+              <th>Core User Pain Point</th>
+              <th>How Reference / Legacy Apps Fail</th>
+              <th>How Modernized MyCash Wins The Market</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Wrong Number Panic & Disputes</strong></td>
+              <td>Typing one wrong digit transfers life savings to a stranger; no recipient name is shown before
+                sending.</td>
+              <td><strong>Zero-Typo Safety Shield:</strong> Real-time recipient avatar, legal name, and verified ID
+                badge shown <em>before</em> sending + <strong>10-Second Undo Hold Buffer</strong>.</td>
+            </tr>
+            <tr>
+              <td><strong>2. Network Blackouts & Congestion</strong></td>
+              <td>When 3G/4G connectivity drops, apps freeze completely, stranding users and merchants at checkouts.
+              </td>
+              <td><strong>Dual-Rail Offline Engine:</strong> Automatically tunnels transactions via encrypted background
+                USSD (<code>*789#</code>) with <strong>100% financial uptime anywhere</strong>.</td>
+            </tr>
+            <tr>
+              <td><strong>3. Merchant Checkout Bottlenecks</strong></td>
+              <td>Cashiers manually inspect SMS notifications in crowded stores, leading to lines and fraud disputes.
+              </td>
+              <td><strong>Sub-100ms QR + Audio Soundbox:</strong> Speaks instant voice confirmations in Somali, Arabic,
+                or English upon payment.</td>
+            </tr>
+            <tr>
+              <td><strong>4. Hidden Remittance Spreads</strong></td>
+              <td>Diaspora sending billions annually lose 5-8% in hidden foreign exchange spreads.</td>
+              <td><strong>Zero-Markup Corridor:</strong> Transparent real-time mid-market rates with 1-tap direct wallet
+                auto-deposit.</td>
+            </tr>
+            <tr>
+              <td><strong>5. Financial Blindness</strong></td>
+              <td>Flat unsearchable SMS text list with zero categorization or tax invoice records.</td>
+              <td><strong>AI Financial Advisor & Ledger:</strong> Categorizes food, bills, and rent automatically, plus
+                generates branded PDF receipts with QR verification stamps.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Section 2: Reference App vs What We Are Building -->
+      <h2 class="block-heading"><span class="block-badge-num">02</span> Feature Comparison: Reference App vs. Modernized MyCash</h2>
+      <p>
+        We have thoroughly analyzed the client's reference application. Below is an exact feature-by-feature breakdown
+        of how Modernized MyCash elevates every single capability into an enterprise neobank experience:
+      </p>
+
+      <div class="table-box">
+        <table>
+          <thead>
+            <tr>
+              <th>Module</th>
+              <th>Reference App Execution</th>
+              <th>Modernized MyCash Breakthrough</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>P2P Money Transfers</strong></td>
+              <td>Basic phone input; recipient verified only after funds leave the wallet.</td>
+              <td><strong>Pre-Validation & Grace Buffer:</strong> Instant legal name check, slide-to-confirm rail, and
+                10-second instant cancellation buffer.</td>
+            </tr>
+            <tr>
+              <td><strong>Merchant QR Payments</strong></td>
+              <td>Slow camera scan requiring manual merchant ID typing as fallback.</td>
+              <td><strong>Universal High-Speed Scanner:</strong> Sub-100ms camera lock on EMVCo codes + instant audio
+                soundbox chime.</td>
+            </tr>
+            <tr>
+              <td><strong>Cash In & Cash Out</strong></td>
+              <td>Static forms requiring users to wander looking for physical cash agents.</td>
+              <td><strong>Dynamic Agent Radar:</strong> 15-minute secure withdrawal token + live GPS map showing agent
+                cash liquidity ($4,500 cash ready).</td>
+            </tr>
+            <tr>
+              <td><strong>Utility & Bill Payments</strong></td>
+              <td>Manual meter typing with delayed receipt confirmations.</td>
+              <td><strong>1-Tap Smart Utility Generator:</strong> Saved meters + automated 20-digit prepaid electricity
+                token generation with 1-tap copy.</td>
+            </tr>
+            <tr>
+              <td><strong>Authentication & Security</strong></td>
+              <td>Static 4-digit PIN stored in unhardened app storage; vulnerable to shoulder-surfing.</td>
+              <td><strong>Hardware Secure Enclave & Shuffled Keypad:</strong> Biometric FaceID/TouchID + randomized PIN
+                pad defeats heat-maps.</td>
+            </tr>
+            <tr>
+              <td><strong>Ecosystem & Multi-Currency</strong></td>
+              <td>Single currency ledger; delayed conversions and manual balance inquiries.</td>
+              <td><strong>Liquid Dual-Currency Vault:</strong> Instant 1-tap toggle between USD and Local Currency with
+                live mid-market parity.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Page Break -->
+      <div class="page-break"></div>
+
+      <!-- Section 3: Phased Strategy -->
+      <h2 class="block-heading"><span class="block-badge-num">03</span> Phased Implementation & Delivery Roadmap</h2>
+      <div class="phase-stack">
+        <div class="phase-card">
+          <div class="phase-card-header">
+            <h4>Phase 1: Architecture & Sub-Second Core Foundation</h4>
+            <span class="phase-pill">Weeks 1 – 4</span>
+          </div>
+          <p>Deliver the complete core wallet engine on modern Flutter 3.x Clean Architecture.</p>
+          <ul>
+            <li>Splash, phone registration, OTP verification, and biometric PIN setup.</li>
+            <li>Sub-second P2P transfers, Cash In/Out tokens, Merchant QR Pay, and Telco billers.</li>
+            <li>Drift SQLite local database with reactive state management via Riverpod 2.0.</li>
+          </ul>
+        </div>
+
+        <div class="phase-card green-accent">
+          <div class="phase-card-header">
+            <h4>Phase 2: Trust Engineering & Safety Shield</h4>
+            <span class="phase-pill" style="background: #ECFDF5; color: #047857;">Weeks 5 – 8</span>
+          </div>
+          <p>Deploy cutting-edge safety features that eliminate consumer fear and transaction disputes.</p>
+          <ul>
+            <li><strong>Typo-Proof Pre-Validation:</strong> Recipient name & avatar confirmed before payment dispatch.
+            </li>
+            <li><strong>10-Second Emergency Hold:</strong> Instant cancellation buffer reduces customer support disputes
+              by 80%.</li>
+            <li><strong>Biometric Hardware Enclave:</strong> FaceID / TouchID authentication + randomized scrambled
+              keypad to defeat heat-maps.</li>
+            <li><strong>Dual-Currency Parity:</strong> Real-time 1-tap toggle between USD and Local Currency with live
+              mid-market ticker.</li>
+          </ul>
+        </div>
+
+        <div class="phase-card amber-accent">
+          <div class="phase-card-header">
+            <h4>Phase 3: The Competitive Edge (Unmatched Capabilities)</h4>
+            <span class="phase-pill" style="background: #FEF3C7; color: #B45309;">Weeks 9 – 12</span>
+          </div>
+          <p>Integrate breakthrough features that set the app far ahead of regional competitors.</p>
+          <ul>
+            <li><strong>Dual-Rail Offline Resilience (USSD Bridge):</strong> Background encrypted USSD shortcodes
+              (<code>*789#</code>) ensure zero transaction loss during internet blackouts.</li>
+            <li><strong>Agent GPS Radar with Live Liquidity:</strong> Users see exact cash availability at nearby
+              agents.</li>
+            <li><strong>Interactive AI Ledger:</strong> Automatic spending categorization (Food, Bills, Rent) and
+              branded QR-stamped PDF receipts.</li>
+            <li><strong>Diaspora Remittance Tracker:</strong> Real-time tracking of incoming transfers from UK, US, UAE,
+              and Europe.</li>
+          </ul>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-card-header">
+            <h4>Phase 4: Regulatory Compliance, Scaling & Production Launch</h4>
+            <span class="phase-pill">Weeks 13 – 14</span>
+          </div>
+          <p>Final hardening, penetration audits, and phased app store deployment.</p>
+          <ul>
+            <li>Central Bank regulatory compliance and PCI-DSS Level 1 security sign-offs.</li>
+            <li>Load testing benchmarked up to 15,000 transactions per second (TPS) peak capacity.</li>
+            <li>Closed beta with 1,000 active subscribers followed by nationwide Google Play & App Store rollout.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Section 4: Tech Stack & ROI -->
+      <h2 class="block-heading"><span class="block-badge-num">04</span> Enterprise Technology Stack & Justification</h2>
+      <div class="table-box">
+        <table>
+          <thead>
+            <tr>
+              <th>Technology Component</th>
+              <th>Why We Use It (Kyu)</th>
+              <th>Business & Tech Benefit (Fayda)</th>
+              <th>Implementation Method (Kaise)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Flutter 3.x (Dart)</strong></td>
+              <td>Native ARM64 direct compilation; no JavaScript bridge.</td>
+              <td>Flawless 60/120 FPS on budget $50 phones and flagship iPhones alike; 45% lower dev costs.</td>
+              <td>Feature-first Clean Architecture with strictly immutable models via Freezed.</td>
+            </tr>
+            <tr>
+              <td><strong>Riverpod 2.0</strong></td>
+              <td>Compile-time safe reactive dependency injection.</td>
+              <td>Zero race-conditions during simultaneous transfers or network socket events.</td>
+              <td>AsyncNotifier providers with auto-disposing listeners and 100% test mocking.</td>
+            </tr>
+            <tr>
+              <td><strong>Drift SQLite + CRDT</strong></td>
+              <td>Type-safe local relational storage with Conflict-Free sync.</td>
+              <td>Instant app open in &lt;50ms; full transaction history readable in offline mode.</td>
+              <td>Optimistic local commits synced automatically when connection restores.</td>
+            </tr>
+            <tr>
+              <td><strong>Go & Rust Microservices</strong></td>
+              <td>Goroutine concurrency; Rust for double-entry financial ledger.</td>
+              <td>25,000+ TPS throughput with mathematical precision and zero memory leaks.</td>
+              <td>Event-sourcing append-only ledger; no raw database balances overwritten.</td>
+            </tr>
+            <tr>
+              <td><strong>Neon Serverless Postgres</strong></td>
+              <td>ACID relational database with instant auto-scaling and branch recovery.</td>
+              <td>Zero double-spending during peak surges (Eid, payroll days).</td>
+              <td>Row-level locking (`SELECT FOR UPDATE`) + Redis distributed locks.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="highlight-quote">
+        <p>
+          <strong>Cloudflare Ready Prototype Simulator Included:</strong> The interactive prototype is completely
+          self-contained in <code>public/index.html</code>. It can be deployed directly to <strong>Cloudflare
+            Pages</strong> or hosted on any domain with zero backend dependencies.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="proposal-bottom">
+      <div>
+        <strong>Nuvanta Technology</strong><br>
+        Enterprise Engineering & FinTech Solutions
+      </div>
+      <div style="text-align: right;">
+        Official Portal: <a href="https://nuvantatechnology.com/en" target="_blank">nuvantatechnology.com</a><br>
+        Proposal Version 7.0 • Strictly Confidential
+      </div>
     </div>
 
   </div>
-
-  <!-- Footer -->
-  <div class="proposal-bottom">
-    <div>
-      <strong>Nuvanta Technology</strong><br>
-      Enterprise Engineering & FinTech Solutions
-    </div>
-    <div style="text-align: right;">
-      Official Portal: <a href="https://nuvantatechnology.com/en" target="_blank">nuvantatechnology.com</a><br>
-      Proposal Version 7.0 • Strictly Confidential
-    </div>
-  </div>
-
-</div>
 
 </body>
+
 </html>
