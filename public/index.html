@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Nuvanta Pay — Next-Gen Neobank & Mobile Money Flagship</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Titanium Midnight Luxury FinTech Palette */
+    --bg-cockpit: #06090F;
+    --phone-chassis: #0B0F19;
+    --app-surface: #0E1424;
+    --card-surface: #141C30;
+    --card-surface-light: #1A243D;
+    --card-border: rgba(255, 255, 255, 0.08);
+    --card-border-focus: rgba(99, 102, 241, 0.4);
+    
+    /* Primary FinTech Trust Accents */
+    --primary-indigo: #4F46E5;
+    --primary-indigo-glow: rgba(79, 70, 229, 0.35);
+    --electric-violet: #6366F1;
+    --cyber-mint: #00E599;
+    --cyber-mint-glow: rgba(0, 229, 153, 0.25);
+    --amber-signal: #F59E0B;
+    --danger-red: #EF4444;
+    
+    /* Typography Colors */
+    --text-white: #FFFFFF;
+    --text-slate: #94A3B8;
+    --text-muted: #64748B;
+    --font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
+  
+  html, body {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-cockpit);
+    font-family: var(--font-body);
+    color: var(--text-white);
+    overflow: hidden;
+  }
+
+  /* Desktop Presenter Layout */
+  .presenter-viewport {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at 50% 20%, #111A33 0%, #06090F 80%);
+  }
+
+  /* Desktop Top Presenter Bar */
+  .presenter-top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background: rgba(11, 15, 25, 0.9);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 28px;
+    z-index: 500;
+  }
+
+  .nuv-brand-unit {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nuv-icon-symbol {
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, #4F46E5, #00E599);
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 20px;
+    font-family: var(--font-heading);
+    color: #FFFFFF;
+    box-shadow: 0 4px 18px rgba(79, 70, 229, 0.45);
+  }
+  .nuv-meta-titles h1 {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    color: #FFFFFF;
+  }
+  .nuv-meta-titles p {
+    font-size: 11px;
+    color: var(--text-slate);
+  }
+  .nuv-meta-titles p span {
+    color: var(--cyber-mint);
+    font-weight: 700;
+  }
+
+  /* Flow Quick Stepper Pills */
+  .flow-stepper-pills {
+    display: flex;
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 4px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .flow-step-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-slate);
+    padding: 6px 13px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-heading);
+  }
+  .flow-step-btn:hover { color: #FFF; background: rgba(255,255,255,0.06); }
+  .flow-step-btn.active {
+    background: var(--primary-indigo);
+    color: #FFF;
+    font-weight: 700;
+    box-shadow: 0 0 14px var(--primary-indigo-glow);
+  }
+
+  .offline-bridge-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    color: var(--amber-signal);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 11.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .offline-bridge-btn.active {
+    background: var(--amber-signal);
+    color: #000;
+  }
+
+  /* Presentation Stage Area */
+  .presenter-main-stage {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 64px;
+    padding: 20px;
+    position: relative;
+    overflow-y: auto;
+  }
+
+  /* Luxury Smartphone Frame */
+  .smartphone-chassis {
+    width: 395px;
+    height: 825px;
+    max-height: 92vh;
+    background: #000000;
+    border-radius: 54px;
+    padding: 11px;
+    box-shadow: 
+      0 0 0 4px #26334D,
+      0 0 0 8px #0D1422,
+      0 30px 90px rgba(0, 0, 0, 0.85),
+      0 0 50px rgba(79, 70, 229, 0.15);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Dynamic Island Notch */
+  .phone-dynamic-island {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 115px;
+    height: 28px;
+    background: #000;
+    border-radius: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .phone-dynamic-island .camera {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #081B2B;
+    border: 1px solid #103350;
+  }
+  .phone-dynamic-island .sensor {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #0D151D;
+  }
+
+  /* Screen Display Viewport */
+  .screen-display-area {
+    flex: 1;
+    background: var(--app-surface);
+    border-radius: 44px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: none;
+  }
+  .screen-display-area::-webkit-scrollbar { display: none; }
+
+  /* Mobile Top Status Bar */
+  .phone-status-bar {
+    padding: 12px 24px 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #FFF;
+    position: relative;
+    z-index: 200;
+  }
+  .status-right-items {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+  }
+
+  /* USSD Emergency Ribbon */
+  .offline-ribbon-bar {
+    display: none;
+    background: var(--amber-signal);
+    color: #000;
+    font-size: 10px;
+    font-weight: 800;
+    text-align: center;
+    padding: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 210;
+  }
+  .offline-ribbon-bar.active { display: block; }
+
+  /* App Screen Pages */
+  .app-screen-page {
+    display: none;
+    flex: 1;
+    flex-direction: column;
+    padding: 10px 18px 24px;
+    animation: screenReveal 0.25s ease forwards;
+  }
+  .app-screen-page.active {
+    display: flex;
+  }
+  @keyframes screenReveal {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* -------------------------------------------
+     SCREEN 1: SPLASH SCREEN (LUXURY FINTECH)
+  -------------------------------------------- */
+  .screen-splash-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 60px 15px 30px;
+    background: linear-gradient(180deg, #111A33 0%, #0E1424 100%);
+  }
+  .splash-logo-card {
+    width: 82px;
+    height: 82px;
+    background: linear-gradient(135deg, #4F46E5, #00E599);
+    border-radius: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    font-weight: 800;
+    color: #FFF;
+    box-shadow: 0 15px 35px rgba(79, 70, 229, 0.45);
+    margin: 0 auto 20px;
+  }
+  .splash-brand-title {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 800;
+    color: #FFFFFF;
+    letter-spacing: -0.6px;
+  }
+  .splash-brand-subtitle {
+    font-size: 13px;
+    color: var(--text-slate);
+    margin-top: 6px;
+    max-width: 270px;
+    line-height: 1.5;
+  }
+  .splash-hero-badge {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--cyber-mint);
+    margin-top: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .splash-button-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .primary-action-btn {
+    width: 100%;
+    height: 52px;
+    background: var(--primary-indigo);
+    border: none;
+    border-radius: 16px;
+    color: #FFFFFF;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 20px var(--primary-indigo-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.15s;
+  }
+  .primary-action-btn:active { transform: scale(0.98); }
+  .secondary-action-btn {
+    width: 100%;
+    height: 52px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    color: #FFFFFF;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  /* -------------------------------------------
+     SCREEN 2: REGISTER / ONBOARDING
+  -------------------------------------------- */
+  .onboarding-screen-box {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 10px 4px;
+  }
+  .screen-step-tracker {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+  .step-bar-fill {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+  .step-bar-fill.done { background: var(--primary-indigo); }
+
+  .onboard-header-title {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 800;
+    color: #FFF;
+    margin-bottom: 6px;
+  }
+  .onboard-header-desc {
+    font-size: 13px;
+    color: var(--text-slate);
+    line-height: 1.5;
+    margin-bottom: 25px;
+  }
+
+  .country-select-dropdown {
+    background: var(--card-surface);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    cursor: pointer;
+  }
+  .phone-input-combo {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .country-code-pill {
+    background: var(--card-surface);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #FFF;
+  }
+  .phone-number-field {
+    flex: 1;
+    background: var(--card-surface);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 700;
+    color: #FFF;
+    outline: none;
+  }
+  .phone-number-field:focus { border-color: var(--primary-indigo); }
+
+  /* -------------------------------------------
+     SCREEN 3: OTP VERIFICATION
+  -------------------------------------------- */
+  .otp-digits-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 25px 0 20px;
+  }
+  .otp-box-cell {
+    width: 48px;
+    height: 56px;
+    background: var(--card-surface);
+    border: 1.5px solid var(--card-border);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 800;
+    color: #FFF;
+  }
+  .otp-box-cell.filled {
+    border-color: var(--primary-indigo);
+    background: rgba(79, 70, 229, 0.15);
+    color: #A5B4FC;
+  }
+
+  /* -------------------------------------------
+     SCREEN 4: PIN & BIOMETRIC SETUP
+  -------------------------------------------- */
+  .pin-dots-container {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 30px 0 35px;
+  }
+  .pin-dot-ring {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--text-muted);
+    transition: all 0.2s;
+  }
+  .pin-dot-ring.filled {
+    background: var(--cyber-mint);
+    border-color: var(--cyber-mint);
+    box-shadow: 0 0 10px var(--cyber-mint-glow);
+  }
+
+  .scrambled-numpad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    width: 100%;
+    max-width: 270px;
+    margin: 0 auto;
+  }
+  .numpad-button {
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #FFF;
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .numpad-button:active {
+    background: var(--primary-indigo);
+    transform: scale(0.92);
+  }
+
+  /* -------------------------------------------
+     SCREEN 5: HOME DASHBOARD (LUXURY FINTECH)
+  -------------------------------------------- */
+  .home-dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .user-badge-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .user-avatar-initials {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4F46E5, #00E599);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+    color: #FFF;
+    border: 2px solid var(--cyber-mint);
+  }
+  .user-info-text h3 {
+    font-size: 14px;
+    font-weight: 800;
+  }
+  .user-info-text p {
+    font-size: 11px;
+    color: var(--text-slate);
+  }
+
+  /* Liquid Balance Card */
+  .wealth-vault-card {
+    background: linear-gradient(135deg, #121A2F 0%, #1A2542 50%, #0F1628 100%);
+    border-radius: 24px;
+    padding: 22px 20px;
+    border: 1px solid rgba(79, 70, 229, 0.35);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .wealth-vault-card::after {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle, rgba(0, 229, 153, 0.25) 0%, transparent 70%);
+  }
+
+  .card-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .card-balance-tag {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #A5B4FC;
+    font-weight: 700;
+  }
+  .currency-pill-toggle {
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 4px 10px;
+    border-radius: 12px;
+    display: flex;
+    gap: 6px;
+    font-size: 10.5px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .currency-pill-toggle span.active { color: var(--cyber-mint); }
+
+  .balance-number-display {
+    font-family: var(--font-heading);
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+  .balance-number-display span.sym { font-size: 22px; color: var(--cyber-mint); }
+  .balance-parity-text {
+    font-size: 11px;
+    color: #94A3B8;
+  }
+
+  /* 6 Quick Action Grid */
+  .quick-action-grid-6 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .action-grid-card {
+    background: var(--card-surface);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 13px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .action-grid-card:active { transform: scale(0.96); background: var(--card-surface-light); }
+  .action-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 13px;
+    background: rgba(79, 70, 229, 0.18);
+    color: #818CF8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .action-icon-wrapper.green {
+    background: rgba(0, 229, 153, 0.15);
+    color: var(--cyber-mint);
+  }
+  .action-icon-wrapper.amber {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--amber-signal);
+  }
+  .action-grid-card span {
+    font-size: 11px;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-align: center;
+  }
+
+  /* AI Spending Insight Pill */
+  .ai-insight-pill-box {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(0, 229, 153, 0.08) 100%);
+    border: 1px solid rgba(79, 70, 229, 0.3);
+    border-radius: 16px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .ai-sparkle { font-size: 20px; }
+  .ai-insight-text h5 {
+    font-size: 12px;
+    font-weight: 800;
+    color: #A5B4FC;
+  }
+  .ai-insight-text p {
+    font-size: 11px;
+    color: #E2E8F0;
+  }
+
+  /* Beneficiaries Horizontal Carousel */
+  .section-headline-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .section-headline-row h4 {
+    font-size: 13px;
+    font-weight: 800;
+  }
+  .section-headline-row a {
+    font-size: 11.5px;
+    color: #818CF8;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .contacts-scroll-deck {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+    margin-bottom: 20px;
+  }
+  .contacts-scroll-deck::-webkit-scrollbar { display: none; }
+  .contact-deck-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    min-width: 58px;
+  }
+  .contact-circle-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--card-surface);
+    border: 2px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13.5px;
+    font-weight: 800;
+    position: relative;
+  }
+  .contact-circle-avatar.online::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 11px;
+    height: 11px;
+    background: var(--cyber-mint);
+    border: 2px solid var(--app-surface);
+    border-radius: 50%;
+  }
+  .contact-deck-item span {
+    font-size: 11px;
+    color: var(--text-slate);
+    font-weight: 600;
+  }
+
+  /* Recent Activity Feed */
+  .activity-feed-deck {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .activity-row-card {
+    background: var(--card-surface);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  .activity-row-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .activity-icon-sq {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+  .activity-text-meta h5 {
+    font-size: 12.5px;
+    font-weight: 700;
+  }
+  .activity-text-meta p {
+    font-size: 10.5px;
+    color: var(--text-muted);
+  }
+  .activity-row-right { text-align: right; }
+  .activity-amount-fig {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 800;
+  }
+  .activity-amount-fig.green { color: var(--cyber-mint); }
+  .activity-status-lbl { font-size: 10px; color: var(--text-muted); font-weight: 600; }
+
+  /* -------------------------------------------
+     SCREEN 6: SEND MONEY (TYPO-PROOF)
+  -------------------------------------------- */
+  .view-sub-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .back-circle-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--card-surface);
+    border: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: 800;
+    color: #FFF;
+  }
+  .view-sub-header h3 {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  .verified-target-card {
+    background: var(--card-surface);
+    border: 1px solid rgba(0, 229, 153, 0.3);
+    border-radius: 18px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .target-profile-flex {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .target-avatar-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #1E293B;
+    color: var(--cyber-mint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .target-title-block h4 {
+    font-size: 13.5px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .verified-shield-pill {
+    background: rgba(0, 229, 153, 0.15);
+    color: var(--cyber-mint);
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 8px;
+    font-weight: 800;
+  }
+  .target-title-block p {
+    font-size: 11px;
+    color: var(--text-slate);
+    font-family: var(--font-mono);
+  }
+
+  .send-amount-key-dial {
+    text-align: center;
+    margin: 20px 0 25px;
+  }
+  .send-amount-key-dial label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--text-slate);
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  .send-figure-hero {
+    font-family: var(--font-heading);
+    font-size: 46px;
+    font-weight: 800;
+    margin: 4px 0;
+  }
+  .send-figure-hero span { color: var(--cyber-mint); font-size: 30px; }
+
+  /* Slide to Confirm Rail */
+  .slide-rail-widget {
+    background: var(--card-surface);
+    border: 1px solid var(--primary-indigo);
+    border-radius: 30px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    margin-top: auto;
+  }
+  .slide-rail-handle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary-indigo);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 4px 15px var(--primary-indigo-glow);
+    transition: transform 0.25s ease;
+  }
+  .slide-rail-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: var(--text-slate);
+    pointer-events: none;
+  }
+
+  /* -------------------------------------------
+     SCREEN 7: QR SCANNER VIEW
+  -------------------------------------------- */
+  .qr-camera-viewport {
+    height: 280px;
+    background: #090E17;
+    border-radius: 24px;
+    border: 2px dashed rgba(79, 70, 229, 0.4);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .laser-scanner-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--cyber-mint);
+    box-shadow: 0 0 16px var(--cyber-mint);
+    animation: laserScanWave 2.2s infinite ease-in-out;
+  }
+  @keyframes laserScanWave {
+    0% { top: 15%; opacity: 0; }
+    50% { opacity: 1; }
+    100% { top: 85%; opacity: 0; }
+  }
+  .qr-reticle-frame {
+    width: 140px;
+    height: 140px;
+    border: 2px solid var(--cyber-mint);
+    border-radius: 16px;
+  }
+
+  /* -------------------------------------------
+     SCREEN 8: BILLS & POWER TOKENS
+  -------------------------------------------- */
+  .token-voucher-card {
+    background: var(--card-surface);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 18px;
+    text-align: center;
+    margin: 20px 0;
+  }
+  .token-code-digits {
+    font-family: var(--font-mono);
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--cyber-mint);
+    letter-spacing: 2px;
+    margin: 10px 0;
+  }
+
+  /* Bottom Navigation Inside Phone */
+  .phone-bottom-nav-bar {
+    height: 64px;
+    background: rgba(14, 20, 36, 0.96);
+    border-top: 1px solid var(--card-border);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 8px;
+    border-radius: 0 0 40px 40px;
+    z-index: 100;
+  }
+  .nav-bar-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .nav-bar-tab.active { color: #818CF8; }
+  .nav-bar-tab svg { width: 20px; height: 20px; }
+
+  /* Toast Notification */
+  .mobile-toast-popup {
+    position: absolute;
+    bottom: 76px;
+    left: 16px;
+    right: 16px;
+    background: var(--card-surface);
+    border: 1px solid var(--cyber-mint);
+    color: #FFFFFF;
+    border-radius: 16px;
+    padding: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    display: none;
+    animation: popupToast 0.25s ease;
+    z-index: 300;
+  }
+  .mobile-toast-popup.show { display: block; }
+  @keyframes popupToast {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Desktop Spec Side Panel */
+  .presenter-spec-panel {
+    width: 380px;
+    margin-left: 35px;
+    background: rgba(14, 20, 36, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .presenter-spec-panel h2 {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    color: #818CF8;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+  }
+  .spec-info-card {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 14px;
+  }
+  .spec-info-card h5 {
+    font-size: 12px;
+    font-weight: 800;
+    color: #FFF;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .spec-info-card p {
+    font-size: 12px;
+    color: var(--text-slate);
+    line-height: 1.5;
+  }
+
+  /* Cloudflare Mobile Viewport */
+  @media (max-width: 820px) {
+    .presenter-top-bar { display: none; }
+    .presenter-spec-panel { display: none; }
+    .presenter-main-stage {
+      margin-top: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100dvh;
+    }
+    .smartphone-chassis {
+      width: 100vw;
+      height: 100dvh;
+      max-height: 100dvh;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+      border: none;
+    }
+    .screen-display-area { border-radius: 0; }
+    .phone-bottom-nav-bar {
+      border-radius: 0;
+      padding-bottom: env(safe-area-inset-bottom, 12px);
+      height: calc(60px + env(safe-area-inset-bottom, 12px));
+    }
+    .phone-dynamic-island { display: none; }
+    .phone-status-bar {
+      padding-top: env(safe-area-inset-top, 10px);
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="presenter-viewport">
+
+  <!-- Desktop Top Presenter Bar -->
+  <header class="presenter-top-bar">
+    <div class="nuv-brand-unit">
+      <div class="nuv-icon-symbol">N</div>
+      <div class="nuv-meta-titles">
+        <h1>Nuvanta Pay — Flagship Neobank</h1>
+        <p>Architected by <span>Nuvanta Technology</span> (Dubai IFZA HQ)</p>
+      </div>
+    </div>
+
+    <!-- Stepper Navigation Pills -->
+    <div class="flow-stepper-pills">
+      <button class="flow-step-btn active" onclick="goToStepScreen('step-splash')">1. Splash</button>
+      <button class="flow-step-btn" onclick="goToStepScreen('step-phone')">2. Register / Phone</button>
+      <button class="flow-step-btn" onclick="goToStepScreen('step-otp')">3. OTP Verify</button>
+      <button class="flow-step-btn" onclick="goToStepScreen('step-pin')">4. Set PIN</button>
+      <button class="flow-step-btn" onclick="goToStepScreen('step-home')">5. Home Dashboard</button>
+      <button class="flow-step-btn" onclick="goToStepScreen('step-send')">6. P2P Transfer</button>
+      <button class="flow-step-btn" onclick="goToStepScreen('step-qr')">7. QR Pay</button>
+      <button class="flow-step-btn" onclick="goToStepScreen('step-bills')">8. Bills</button>
+    </div>
+
+    <button class="offline-bridge-btn" id="btnUssdToggle" onclick="toggleOfflineUssd()">
+      <span>⚡</span>
+      <span id="labelUssd">Offline USSD Bridge</span>
+    </button>
+  </header>
+
+  <!-- Presenter Main Stage -->
+  <main class="presenter-main-stage">
+
+    <div class="smartphone-chassis">
+
+      <!-- Dynamic Island Notch -->
+      <div class="phone-dynamic-island" id="islandBar">
+        <div class="camera"></div>
+        <div class="sensor"></div>
+      </div>
+
+      <!-- App Viewport -->
+      <div class="screen-display-area">
+
+        <!-- Mobile Status Bar -->
+        <div class="phone-status-bar" id="mobileStatusBar">
+          <span id="phoneClock">10:45</span>
+          <div class="status-right-items">
+            <span id="signalIndicator">5G Ultra</span>
+            <span>●●●</span>
+            <span>100%</span>
+          </div>
+        </div>
+
+        <!-- USSD Emergency Ribbon -->
+        <div class="offline-ribbon-bar" id="offlineRibbon">
+          ⚡ OFFLINE MODE: ACTIVE VIA ENCRYPTED TELECOM USSD RAIL (*789#)
+        </div>
+
+        <!-- SCREEN 1: SPLASH SCREEN -->
+        <div class="app-screen-page active screen-splash-container" id="step-splash">
+          <div>
+            <div class="splash-logo-card">N</div>
+            <h1 class="splash-brand-title">Nuvanta Pay</h1>
+            <p class="splash-brand-subtitle">The intelligent financial operating system for modern money.</p>
+            <div class="splash-hero-badge">
+              <span>🛡️</span> Bank-Grade Encryption • Zero Fees
+            </div>
+          </div>
+
+          <div class="splash-button-group">
+            <button class="primary-action-btn" onclick="goToStepScreen('step-phone')">
+              Get Started <span>→</span>
+            </button>
+            <button class="secondary-action-btn" onclick="goToStepScreen('step-pin')">
+              Log In to Existing Account
+            </button>
+          </div>
+        </div>
+
+        <!-- SCREEN 2: PHONE REGISTRATION / ONBOARDING -->
+        <div class="app-screen-page" id="step-phone">
+          <div class="onboarding-screen-box">
+            <div class="screen-step-tracker">
+              <div class="step-bar-fill done"></div>
+              <div class="step-bar-fill"></div>
+              <div class="step-bar-fill"></div>
+            </div>
+
+            <h2 class="onboard-header-title">Enter Phone Number</h2>
+            <p class="onboard-header-desc">Select your country and mobile number to receive your secure verification code.</p>
+
+            <div class="country-select-dropdown" onclick="cycleCountryCode()">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span id="countryFlag">🇦🇪</span>
+                <span id="countryName" style="font-weight: 700; font-size: 13px;">United Arab Emirates (+971)</span>
+              </div>
+              <span style="font-size: 11px; color: var(--primary-indigo);">Tap to Switch</span>
+            </div>
+
+            <div class="phone-input-combo">
+              <div class="country-code-pill">
+                <span id="countryDialCode">+971</span>
+              </div>
+              <input type="tel" class="phone-number-field" id="userPhoneInput" value="58 123 4567" placeholder="50 000 0000">
+            </div>
+
+            <p style="font-size: 11px; color: var(--text-slate); margin-bottom: 25px;">
+              By continuing, you agree to Nuvanta Pay's Terms of Service and Anti-Fraud Verification Policy.
+            </p>
+
+            <button class="primary-action-btn" style="margin-top: auto;" onclick="goToStepScreen('step-otp')">
+              Send Verification Code <span>→</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SCREEN 3: 6-DIGIT OTP VERIFICATION -->
+        <div class="app-screen-page" id="step-otp">
+          <div class="onboarding-screen-box">
+            <div class="screen-step-tracker">
+              <div class="step-bar-fill done"></div>
+              <div class="step-bar-fill done"></div>
+              <div class="step-bar-fill"></div>
+            </div>
+
+            <h2 class="onboard-header-title">Verify Your Code</h2>
+            <p class="onboard-header-desc">Sent to <strong id="sentPhoneLabel" style="color: #FFF;">+971 58 123 4567</strong>. Auto-filling security token...</p>
+
+            <div class="otp-digits-row">
+              <div class="otp-box-cell filled">8</div>
+              <div class="otp-box-cell filled">4</div>
+              <div class="otp-box-cell filled">2</div>
+              <div class="otp-box-cell filled">1</div>
+              <div class="otp-box-cell filled">0</div>
+              <div class="otp-box-cell filled">9</div>
+            </div>
+
+            <p style="font-size: 12px; color: var(--text-slate); text-align: center; margin-bottom: 30px;">
+              Resend code in <strong style="color: #818CF8;">0:42</strong>
+            </p>
+
+            <button class="primary-action-btn" style="margin-top: auto;" onclick="goToStepScreen('step-pin')">
+              Confirm & Continue <span>→</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SCREEN 4: SECURITY PIN SETUP -->
+        <div class="app-screen-page" id="step-pin" style="text-align: center;">
+          <div class="view-sub-header">
+            <div class="back-circle-btn" onclick="goToStepScreen('step-splash')">←</div>
+            <h3>Security PIN</h3>
+            <span style="font-size: 11px; color: var(--cyber-mint); font-weight: 700;">Biometrics</span>
+          </div>
+
+          <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; margin-top: 15px;">Enter Your 4-Digit PIN</h2>
+          <p style="font-size: 12px; color: var(--text-slate); margin-top: 4px;">Protected by Hardware Secure Enclave</p>
+
+          <div class="pin-dots-container">
+            <div class="pin-dot-ring filled"></div>
+            <div class="pin-dot-ring filled"></div>
+            <div class="pin-dot-ring"></div>
+            <div class="pin-dot-ring"></div>
+          </div>
+
+          <div class="scrambled-numpad">
+            <div class="numpad-button" onclick="pressPin('1')">1</div>
+            <div class="numpad-button" onclick="pressPin('2')">2</div>
+            <div class="numpad-button" onclick="pressPin('3')">3</div>
+            <div class="numpad-button" onclick="pressPin('4')">4</div>
+            <div class="numpad-button" onclick="pressPin('5')">5</div>
+            <div class="numpad-button" onclick="pressPin('6')">6</div>
+            <div class="numpad-button" onclick="pressPin('7')">7</div>
+            <div class="numpad-button" onclick="pressPin('8')">8</div>
+            <div class="numpad-button" onclick="pressPin('9')">9</div>
+            <div class="numpad-button" onclick="triggerFaceIdAuth()">🔒</div>
+            <div class="numpad-button" onclick="pressPin('0')">0</div>
+            <div class="numpad-button" onclick="triggerFaceIdAuth()">✓</div>
+          </div>
+        </div>
+
+        <!-- SCREEN 5: HOME DASHBOARD (LUXURY FINTECH) -->
+        <div class="app-screen-page" id="step-home">
+          <div class="home-dash-header">
+            <div class="user-badge-group">
+              <div class="user-avatar-initials">SK</div>
+              <div class="user-info-text">
+                <h3>Saklain Khan</h3>
+                <p>+971 58 123 4567 • Tier 3 Verified</p>
+              </div>
+            </div>
+            <div style="font-size: 19px; cursor: pointer;" onclick="goToStepScreen('step-pin')">🔒</div>
+          </div>
+
+          <!-- Luxury Balance Card -->
+          <div class="wealth-vault-card">
+            <div class="card-header-flex">
+              <span class="card-balance-tag">Total Vault Balance</span>
+              <div class="currency-pill-toggle" onclick="toggleCurrencyMode()">
+                <span id="chipUSD" class="active">USD</span>
+                <span>/</span>
+                <span id="chipAED">AED</span>
+              </div>
+            </div>
+            <div class="balance-number-display" id="dashBalanceNumber">
+              <span class="sym">$</span>24,850.50
+            </div>
+            <div class="balance-parity-text" id="dashBalanceParity">
+              ≈ AED 91,263.45 (Interbank Mid-Market Rate)
+            </div>
+          </div>
+
+          <!-- 6 Quick Action Grid -->
+          <div class="quick-action-grid-6">
+            <div class="action-grid-card" onclick="goToStepScreen('step-send')">
+              <div class="action-icon-wrapper">↗</div>
+              <span>Send</span>
+            </div>
+            <div class="action-grid-card" onclick="goToStepScreen('step-qr')">
+              <div class="action-icon-wrapper green">⛶</div>
+              <span>Scan QR</span>
+            </div>
+            <div class="action-grid-card" onclick="showAppToast('Cash Out: Nearest agent holding $4,500 cash 100m away')">
+              <div class="action-icon-wrapper amber">🏧</div>
+              <span>Cash Out</span>
+            </div>
+            <div class="action-grid-card" onclick="showAppToast('Deposit barcode ready for agent cash loading')">
+              <div class="action-icon-wrapper green">📥</div>
+              <span>Deposit</span>
+            </div>
+            <div class="action-grid-card" onclick="goToStepScreen('step-bills')">
+              <div class="action-icon-wrapper">⚡</div>
+              <span>Bills</span>
+            </div>
+            <div class="action-grid-card" onclick="showAppToast('Global Remittance corridor active: UK, US, UAE')">
+              <div class="action-icon-wrapper amber">🌐</div>
+              <span>Remit</span>
+            </div>
+          </div>
+
+          <!-- AI Financial Advisor Pill -->
+          <div class="ai-insight-pill-box">
+            <div class="ai-sparkle">✨</div>
+            <div class="ai-insight-text">
+              <h5>Nuvanta AI Financial Advisor</h5>
+              <p>You saved $380 on utilities this month. On track for $5K vault target.</p>
+            </div>
+          </div>
+
+          <!-- Beneficiaries Horizontal Row -->
+          <div class="section-headline-row">
+            <h4>Quick Beneficiaries</h4>
+            <a href="#" onclick="goToStepScreen('step-send')">View All</a>
+          </div>
+          <div class="contacts-scroll-deck">
+            <div class="contact-deck-item" onclick="quickSendPrefill('Sarah Jenkins', '+971 50 444 8921')">
+              <div class="contact-circle-avatar online" style="background: rgba(79, 70, 229, 0.2); color: #818CF8;">SJ</div>
+              <span>Sarah</span>
+            </div>
+            <div class="contact-deck-item" onclick="quickSendPrefill('Ahmed Al-Mansoori', '+971 55 981 2234')">
+              <div class="contact-circle-avatar online" style="background: rgba(0, 229, 153, 0.2); color: var(--cyber-mint);">AA</div>
+              <span>Ahmed</span>
+            </div>
+            <div class="contact-deck-item" onclick="quickSendPrefill('Dubai Power (DEWA)', 'ACC-89102')">
+              <div class="contact-circle-avatar" style="background: rgba(245, 158, 11, 0.2); color: var(--amber-signal);">⚡</div>
+              <span>DEWA</span>
+            </div>
+            <div class="contact-deck-item" onclick="quickSendPrefill('London Wire', 'UK-BARCLAYS')">
+              <div class="contact-circle-avatar" style="background: rgba(168, 85, 247, 0.2); color: #C084FC;">🌐</div>
+              <span>London</span>
+            </div>
+          </div>
+
+          <!-- Recent Activity Feed -->
+          <div class="section-headline-row">
+            <h4>Recent Activity</h4>
+            <a href="#" onclick="showAppToast('Official verified PDF statement downloaded')">Export PDF</a>
+          </div>
+          <div class="activity-feed-deck">
+            <div class="activity-row-card" onclick="showAppToast('Receipt #TX-908122 for Sarah Jenkins (-$75.00) downloaded')">
+              <div class="activity-row-left">
+                <div class="activity-icon-sq">↗</div>
+                <div class="activity-text-meta">
+                  <h5>Transfer to Sarah Jenkins</h5>
+                  <p>P2P Instant • Today 11:20</p>
+                </div>
+              </div>
+              <div class="activity-row-right">
+                <div class="activity-amount-fig">-$75.00</div>
+                <div class="activity-status-lbl">Completed</div>
+              </div>
+            </div>
+            <div class="activity-row-card" onclick="showAppToast('Receipt #TX-908121 for Payroll (+$4,250.00) downloaded')">
+              <div class="activity-row-left">
+                <div class="activity-icon-sq" style="color: var(--cyber-mint);">↓</div>
+                <div class="activity-text-meta">
+                  <h5>Salary Disbursement</h5>
+                  <p>Enterprise Direct • Yesterday</p>
+                </div>
+              </div>
+              <div class="activity-row-right">
+                <div class="activity-amount-fig green">+$4,250.00</div>
+                <div class="activity-status-lbl">Instant Credit</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCREEN 6: SEND MONEY (TYPO-PROOF P2P) -->
+        <div class="app-screen-page" id="step-send">
+          <div class="view-sub-header">
+            <div class="back-circle-btn" onclick="goToStepScreen('step-home')">←</div>
+            <h3>Send Money (P2P)</h3>
+            <span style="font-size: 11px; color: var(--cyber-mint); font-weight: 700;">Typo Guard</span>
+          </div>
+
+          <div class="verified-target-card">
+            <div class="target-profile-flex">
+              <div class="target-avatar-circle" id="targetAvatarInitials">SJ</div>
+              <div class="target-title-block">
+                <h4 id="targetProfileName">Sarah Jenkins <span class="verified-shield-pill">VERIFIED ID</span></h4>
+                <p id="targetProfilePhone">+971 50 444 8921 • Central Bank Fast Rail</p>
+              </div>
+            </div>
+            <span style="font-size: 11.5px; color: #818CF8; font-weight: 700; cursor: pointer;" onclick="changeRecipientPrompt()">Change</span>
+          </div>
+
+          <div class="send-amount-key-dial">
+            <label>Transfer Amount</label>
+            <div class="send-figure-hero">
+              <span>$</span><span id="sendFigureText">120.00</span>
+            </div>
+            <p style="font-size: 11px; color: var(--text-muted);">Network Fee: $0.00 (Zero-Fee Nuvanta Rail)</p>
+          </div>
+
+          <!-- Slide to Confirm Slider -->
+          <div class="slide-rail-widget" onclick="executeP2PSlide()">
+            <div class="slide-rail-handle" id="sliderP2PHandle">➔</div>
+            <div class="slide-rail-caption">SLIDE TO TRANSFER $120.00</div>
+          </div>
+        </div>
+
+        <!-- SCREEN 7: QR SCANNER PAY -->
+        <div class="app-screen-page" id="step-qr">
+          <div class="view-sub-header">
+            <div class="back-circle-btn" onclick="goToStepScreen('step-home')">←</div>
+            <h3>Merchant QR Pay</h3>
+            <span style="font-size: 11px; color: var(--primary-indigo); font-weight: 700;">EMVCo</span>
+          </div>
+
+          <div class="qr-camera-viewport">
+            <div class="laser-scanner-line"></div>
+            <div class="qr-reticle-frame"></div>
+          </div>
+
+          <div style="text-align: center; margin-bottom: 20px;">
+            <h4 style="font-size: 14px; font-weight: 800; color: #FFFFFF; margin-bottom: 4px;">Point Camera at Merchant QR</h4>
+            <p style="font-size: 11.5px; color: var(--text-slate);">Sub-100ms camera lock with soundbox audio receipt confirmation</p>
+          </div>
+
+          <button class="primary-action-btn" onclick="simulateMerchantCheckout()">
+            Simulate Merchant Checkout ($34.50)
+          </button>
+        </div>
+
+        <!-- SCREEN 8: SMART BILLS & TOKENS -->
+        <div class="app-screen-page" id="step-bills">
+          <div class="view-sub-header">
+            <div class="back-circle-btn" onclick="goToStepScreen('step-home')">←</div>
+            <h3>Smart Bills & Telco</h3>
+            <span style="font-size: 11px; color: var(--primary-indigo); font-weight: 700;">Auto-Biller</span>
+          </div>
+
+          <div class="quick-action-grid-6" style="grid-template-columns: repeat(2, 1fr); margin-bottom: 16px;">
+            <div class="action-grid-card" onclick="generatePowerVoucher()">
+              <div class="action-icon-wrapper amber">⚡</div>
+              <span>Prepaid Power Token</span>
+            </div>
+            <div class="action-grid-card" onclick="showAppToast('Recharged 25GB 5G High-Speed Data!')">
+              <div class="action-icon-wrapper green">📶</div>
+              <span>5G Data Bundles</span>
+            </div>
+          </div>
+
+          <div class="token-voucher-card" id="powerVoucherCard" style="display: none;">
+            <h5 style="font-size: 11px; color: var(--text-slate); text-transform: uppercase;">20-Digit Power Token Generated</h5>
+            <div class="token-code-digits" id="powerVoucherDigits">4812 - 9901 - 7734 - 1102</div>
+            <p style="font-size: 11px; color: var(--text-slate); margin-bottom: 8px;">Units Credited: 65.0 kWh • Meter #8812</p>
+            <button class="secondary-action-btn" style="height: 40px; font-size: 12px;" onclick="copyTokenVoucher()">Copy Token Code</button>
+          </div>
+        </div>
+
+        <!-- Notification Toast inside Phone -->
+        <div class="mobile-toast-popup" id="phoneToast">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <strong id="toastHeader" style="font-size: 12px; color: #FFF;">Notice</strong>
+            <span style="font-size: 10px; color: #94A3B8; cursor: pointer;" onclick="dismissToast()">✕</span>
+          </div>
+          <p id="toastBody" style="font-size: 11px; color: #CBD5E1; margin-top: 4px;"></p>
+        </div>
+
+      </div>
+
+      <!-- Bottom Tab Bar Inside Phone (Visible on Home & Core Screens) -->
+      <div class="phone-bottom-nav-bar" id="phoneBottomBar">
+        <button class="nav-bar-tab active" id="tabNavHome" onclick="goToStepScreen('step-home')">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          Home
+        </button>
+        <button class="nav-bar-tab" id="tabNavSend" onclick="goToStepScreen('step-send')">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          Send
+        </button>
+        <button class="nav-bar-tab" id="tabNavQR" onclick="goToStepScreen('step-qr')">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm15 0h3v3h-3zm-5 5h3v3h-3zm5 0h3v3h-3zm-5-5h3v3h-3z"/></svg>
+          Scan
+        </button>
+        <button class="nav-bar-tab" id="tabNavBills" onclick="goToStepScreen('step-bills')">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M13 2.05v3.03c3.39.49 6 3.39 6 6.92 0 .9-.18 1.75-.48 2.54l2.6 1.53c.56-1.24.88-2.62.88-4.07 0-5.18-3.95-9.45-9-9.95zM12 19c-3.87 0-7-3.13-7-7 0-3.53 2.61-6.43 6-6.92V2.05c-5.05.5-9 4.76-9 9.95 0 5.52 4.47 10 9.99 10 3.31 0 6.24-1.61 8.04-4.09l-2.45-1.45C16.14 17.84 14.21 19 12 19z"/></svg>
+          Bills
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Desktop Specifications Panel -->
+    <div class="presenter-spec-panel">
+      <h2>
+        <span>🛡️</span> Nuvanta Neobank Cockpit
+      </h2>
+
+      <div class="spec-info-card">
+        <h5>Titanium Midnight Luxury Aesthetic</h5>
+        <p>
+          World-class FinTech design system combining Deep Titanium Black (#0B0F19), Electric Indigo (#4F46E5), and Cyber Mint (#00E599).
+        </p>
+      </div>
+
+      <div class="spec-info-card">
+        <h5>Complete Natural Screen Flow</h5>
+        <p id="specFlowDesc">
+          <strong>Step 1: Splash Screen</strong><br>
+          Smooth entry with brand emblem and instant biometric or phone onboarding pathways.
+        </p>
+      </div>
+
+      <div class="spec-info-card">
+        <h5>Dual-Rail Offline Resilience (USSD Bridge)</h5>
+        <p id="specUssdStatus">
+          Rail: <strong style="color: var(--cyber-mint);">5G High-Speed Cloud Active</strong><br>
+          If internet drops, transactions tunnel over encrypted background USSD shortcodes (*789#) with 100% financial uptime.
+        </p>
+      </div>
+
+      <div class="spec-info-card">
+        <h5>Typo-Proof & Safety Shield</h5>
+        <p>
+          Pre-validates legal beneficiary name before PIN entry. 5-second emergency hold buffer allows zero-fee instant payment retraction.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+<script>
+  // Web Audio Chime for realistic soundbox & payment feedback
+  function playSuccessChime() {
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+      osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.15); // A5
+      gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.35);
+    } catch(e) {}
+  }
+
+  // Country code switcher
+  const countries = [
+    { flag: "🇦🇪", name: "United Arab Emirates (+971)", code: "+971", phone: "58 123 4567" },
+    { flag: "🇸🇴", name: "Somalia & Somaliland (+252)", code: "+252", phone: "61 984 2100" },
+    { flag: "🇺🇸", name: "United States (+1)", code: "+1", phone: "415 555 2671" },
+    { flag: "🇬🇧", name: "United Kingdom (+44)", code: "+44", phone: "7911 123456" },
+    { flag: "🇰🇪", name: "Kenya (+254)", code: "+254", phone: "712 345 678" }
+  ];
+  let currentCountryIdx = 0;
+  function cycleCountryCode() {
+    currentCountryIdx = (currentCountryIdx + 1) % countries.length;
+    const c = countries[currentCountryIdx];
+    document.getElementById('countryFlag').innerText = c.flag;
+    document.getElementById('countryName').innerText = c.name;
+    document.getElementById('countryDialCode').innerText = c.code;
+    document.getElementById('userPhoneInput').value = c.phone;
+    document.getElementById('sentPhoneLabel').innerText = `${c.code} ${c.phone}`;
+  }
+
+  // Screen Router
+  function goToStepScreen(stepId) {
+    document.querySelectorAll('.app-screen-page').forEach(page => page.classList.remove('active'));
+    document.getElementById(stepId).classList.add('active');
+
+    // Update Top Presenter Buttons
+    document.querySelectorAll('.flow-step-btn').forEach(btn => btn.classList.remove('active'));
+    const matchedTopBtn = Array.from(document.querySelectorAll('.flow-step-btn')).find(b => b.getAttribute('onclick').includes(stepId));
+    if (matchedTopBtn) matchedTopBtn.classList.add('active');
+
+    // Bottom Navigation Bar visibility
+    const bottomBar = document.getElementById('phoneBottomBar');
+    if (stepId === 'step-splash' || stepId === 'step-phone' || stepId === 'step-otp' || stepId === 'step-pin') {
+      bottomBar.style.display = 'none';
+    } else {
+      bottomBar.style.display = 'flex';
+    }
+
+    // Bottom tab active sync
+    document.querySelectorAll('.nav-bar-tab').forEach(tab => tab.classList.remove('active'));
+    if (stepId === 'step-home') document.getElementById('tabNavHome')?.classList.add('active');
+    if (stepId === 'step-send') document.getElementById('tabNavSend')?.classList.add('active');
+    if (stepId === 'step-qr') document.getElementById('tabNavQR')?.classList.add('active');
+    if (stepId === 'step-bills') document.getElementById('tabNavBills')?.classList.add('active');
+
+    // Update Spec Panel Info
+    const specDesc = document.getElementById('specFlowDesc');
+    if (stepId === 'step-splash') {
+      specDesc.innerHTML = "<strong>Step 1: Brand Splash Screen</strong><br>Features high-converting visual branding and quick entry options.";
+    } else if (stepId === 'step-phone') {
+      specDesc.innerHTML = "<strong>Step 2: Phone Number Onboarding</strong><br>Automatic country-code detection and instant SMS/WhatsApp token dispatch.";
+    } else if (stepId === 'step-otp') {
+      specDesc.innerHTML = "<strong>Step 3: 6-Digit OTP Verification</strong><br>Simulates automatic SMS OTP autofill with cryptographic key exchange.";
+    } else if (stepId === 'step-pin') {
+      specDesc.innerHTML = "<strong>Step 4: Security PIN & Hardware Biometrics</strong><br>Stored in Android KeyStore / Apple Secure Enclave with randomized PIN pad.";
+    } else if (stepId === 'step-home') {
+      specDesc.innerHTML = "<strong>Step 5: Home Wealth Dashboard</strong><br>Multi-currency liquid balance, 6 core actions, AI Advisor, and quick contacts.";
+    } else if (stepId === 'step-send') {
+      specDesc.innerHTML = "<strong>Step 6: Typo-Proof P2P Transfer</strong><br>Pre-validates recipient identity before PIN. Slide-to-pay with 5s cancel hold.";
+    } else if (stepId === 'step-qr') {
+      specDesc.innerHTML = "<strong>Step 7: Universal QR & Soundbox</strong><br>Sub-100ms merchant barcode recognition + instant soundbox audio chime.";
+    } else if (stepId === 'step-bills') {
+      specDesc.innerHTML = "<strong>Step 8: Smart Bills & Prepaid Power</strong><br>Enter meter number to generate instant 20-digit prepaid token with 1-tap copy.";
+    }
+  }
+
+  // Pin & Biometric Simulation
+  let enteredPinCount = "";
+  function pressPin(digit) {
+    enteredPinCount += digit;
+    if (enteredPinCount.length >= 4) {
+      triggerFaceIdAuth();
+      enteredPinCount = "";
+    }
+  }
+
+  function triggerFaceIdAuth() {
+    playSuccessChime();
+    const island = document.getElementById('islandBar');
+    island.style.width = "180px";
+    island.style.background = "#141C30";
+    setTimeout(() => {
+      island.style.width = "115px";
+      island.style.background = "#000";
+      goToStepScreen('step-home');
+    }, 350);
+  }
+
+  // Dual Currency Switcher
+  let isUSDMode = true;
+  function toggleCurrencyMode() {
+    isUSDMode = !isUSDMode;
+    const balanceNum = document.getElementById('dashBalanceNumber');
+    const balanceParity = document.getElementById('dashBalanceParity');
+    const chipUSD = document.getElementById('chipUSD');
+    const chipAED = document.getElementById('chipAED');
+
+    if (isUSDMode) {
+      balanceNum.innerHTML = '<span class="sym">$</span>24,850.50';
+      balanceParity.innerText = '≈ AED 91,263.45 (Interbank Mid-Market Rate)';
+      chipUSD.classList.add('active');
+      chipAED.classList.remove('active');
+    } else {
+      balanceNum.innerHTML = '<span class="sym">AED </span>91,263.45';
+      balanceParity.innerText = '≈ $24,850.50 USD (Exchange Rate: 1 USD = 3.6725 AED)';
+      chipAED.classList.add('active');
+      chipUSD.classList.remove('active');
+    }
+  }
+
+  // Quick Send Prefill
+  function quickSendPrefill(name, phone) {
+    document.getElementById('targetProfileName').innerHTML = name + ' <span class="verified-shield-pill">VERIFIED ID</span>';
+    document.getElementById('targetProfilePhone').innerText = phone + ' • Central Bank Fast Rail';
+    document.getElementById('targetAvatarInitials').innerText = name.substring(0, 2).toUpperCase();
+    goToStepScreen('step-send');
+  }
+
+  function changeRecipientPrompt() {
+    const newName = prompt("Enter recipient name or mobile number:", "Karim Al-Hassan (+971 52 888 1200)");
+    if (newName) {
+      document.getElementById('targetProfileName').innerHTML = 'Karim Al-Hassan <span class="verified-shield-pill">VERIFIED ID</span>';
+      document.getElementById('targetProfilePhone').innerText = '+971 52 888 1200 • Verified Nuvanta User';
+      document.getElementById('targetAvatarInitials').innerText = 'KH';
+    }
+  }
+
+  // P2P Slide to Pay
+  function executeP2PSlide() {
+    const handle = document.getElementById('sliderP2PHandle');
+    handle.style.transform = "translateX(275px)";
+    setTimeout(() => {
+      playSuccessChime();
+      showAppToast("Payment of $120.00 Sent! 10-second emergency Undo buffer active.");
+      handle.style.transform = "translateX(0)";
+      setTimeout(() => goToStepScreen('step-home'), 1200);
+    }, 280);
+  }
+
+  // Merchant Checkout
+  function simulateMerchantCheckout() {
+    playSuccessChime();
+    showAppToast("Merchant Verified: Marina City Mart ($34.50) Paid! Soundbox audio chime confirmed.");
+  }
+
+  // Power Voucher
+  function generatePowerVoucher() {
+    playSuccessChime();
+    document.getElementById('powerVoucherCard').style.display = 'block';
+    showAppToast("Prepaid power token generated for Meter #8812 (65.0 kWh)");
+  }
+  function copyTokenVoucher() {
+    navigator.clipboard?.writeText("4812990177341102");
+    showAppToast("Token code 4812-9901-7734-1102 copied to clipboard!");
+  }
+
+  // Toast Notification
+  let toastTimer;
+  function showAppToast(message, header = "Notice") {
+    const toast = document.getElementById('phoneToast');
+    document.getElementById('toastHeader').innerText = header;
+    document.getElementById('toastBody').innerText = message;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 4500);
+  }
+  function dismissToast() {
+    document.getElementById('phoneToast').classList.remove('show');
+  }
+
+  // USSD Offline Bridge
+  let isUssdOn = false;
+  function toggleOfflineUssd() {
+    isUssdOn = !isUssdOn;
+    const ribbon = document.getElementById('offlineRibbon');
+    const toggleBtn = document.getElementById('btnUssdToggle');
+    const label = document.getElementById('labelUssd');
+    const signal = document.getElementById('signalIndicator');
+    const specStatus = document.getElementById('specUssdStatus');
+
+    if (isUssdOn) {
+      ribbon.classList.add('active');
+      toggleBtn.classList.add('active');
+      label.innerText = "Switch to 5G Online";
+      signal.innerText = "No Signal (USSD Fallback)";
+      specStatus.innerHTML = "<span style='color: #F59E0B; font-weight:800;'>USSD Fallback Active</span> (Encrypted Shortcode Protocol)";
+      showAppToast("Internet Disconnected: Background USSD Failover Rail Armed", "Offline Mode");
+    } else {
+      ribbon.classList.remove('active');
+      toggleBtn.classList.remove('active');
+      label.innerText = "Offline USSD Bridge";
+      signal.innerText = "5G Ultra";
+      specStatus.innerHTML = "<span style='color: var(--cyber-mint); font-weight:800;'>5G High-Speed Cloud Active</span>";
+      showAppToast("5G Connection Restored: Resuming Sub-Second WebSockets", "Online");
+    }
+  }
+
+  // Live Clock
+  setInterval(() => {
+    const d = new Date();
+    const hh = String(d.getHours()).padStart(2, '0');
+    const mm = String(d.getMinutes()).padStart(2, '0');
+    document.getElementById('phoneClock').innerText = `${hh}:${mm}`;
+  }, 1000);
+</script>
+</body>
+</html>

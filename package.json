@@ -1,0 +1,13 @@
+{
+  "name": "nuvanta-fintech",
+  "version": "1.0.0",
+  "description": "Nuvanta Pay — Next-Gen Neobank & Mobile Financial Operating System",
+  "scripts": {
+    "start": "npx serve public -p 3000",
+    "dev": "npx serve public -p 3000",
+    "deploy": "npx wrangler pages deploy public --project-name=nuvanta-pay"
+  },
+  "keywords": ["fintech", "neobank", "mobile-money", "nuvanta", "payments"],
+  "author": "Saklain Khan (Nuvanta Technologies FZCO)",
+  "license": "UNLICENSED"
+}
